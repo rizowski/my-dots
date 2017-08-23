@@ -1,0 +1,20 @@
+cask "google-chrome"
+cask "spotify"
+cask "spotify-notifications"
+cask "iterm2"
+cask "resilio-sync"
+cask "dropbox"
+cask "atom"
+cask "visual-studio-code"
+cask "keka"
+cask "keybase"
+cask "1password"
+cask "slack"
+cask "discord"
+cask "teamviewer"
+cask "divvy"
+
+brew zsh
+brew git
+brew z
+brew gpg
