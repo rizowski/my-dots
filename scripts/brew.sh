@@ -7,6 +7,8 @@ fi
 brew update
 brew tap caskroom/cask
 brew tap Homebrew/bundle
+brew tap 'homebrew/completions'
+brew tap 'homebrew/core'
 brew upgrade -y
 
 brew bundle
