@@ -1,14 +1,32 @@
+tap "caskroom/cask"
+tap "caskroom/fonts"
+tap "homebrew/core"
+
+cask "java"
+
+brew "aws-elasticbeanstalk"
+brew "couchdb"
+brew "git"
+brew "ffmpeg"
+brew "gnupg"
+brew "ruby"
+brew "z"
+brew "zsh"
+brew "zsh-completions"
+
 cask "1password"
 cask "alfred"
+cask "android-platform-tools"
 cask "atom"
 cask "caffeine"
+cask "dash"
 cask "discord"
 cask "divvy"
 cask "dropbox"
+cask "font-fira-code"
 cask "gitify"
 cask "google-chrome"
 cask "iterm2"
-cask "java"
 cask "keka"
 cask "keybase"
 cask "p4merge"
@@ -16,11 +34,7 @@ cask "resilio-sync"
 cask "slack"
 cask "spotify"
 cask "spotify-notifications"
+cask "sublime"
+cask "sublime-text"
 cask "teamviewer"
 cask "visual-studio-code"
-
-brew zsh
-brew git
-brew z
-brew gpg
-brew "zsh-completions"

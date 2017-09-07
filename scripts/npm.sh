@@ -1,4 +1,5 @@
-source ./helpers.sh
+#!/bin/bash
+source $PWD/scripts/helpers.sh
 
 NVM_VERSION=$(nvm --version)
 NPM_USER=$(npm whoami)

@@ -3,10 +3,6 @@
   st = status
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   la = !git lg --all
-[user]
-  name = Colten Rouska
-  email = colten.rouska@vivintsolar.com
-  signingkey = 9830045FC0A8667B3AB1EEDC8667A9D7A31294CB
 [remote "origin"]
   fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
 [merge]
@@ -23,3 +19,11 @@
   cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge "\"$REMOTE\"" "\"$LOCAL\""
 [commit]
   gpgsign = true
+
+[user]
+  name = Colten Rouska
+  email = crouska@gmail.com
+  signingkey = F5C4A8AEAA463AD9879DB149F82640A0AEC7A210
+
+[includeIf "gitdir:~/git/vs/**"]
+  path = ~/.gitconfig-work

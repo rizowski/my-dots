@@ -1,17 +1,23 @@
-source ./helpers.sh
+#!/bin/bash
+source $PWD/scripts/helpers.sh
 
 link_file(){
   print "Linking $1"
-  ln -s ../files/$1 $HOME/$1
+  ln -s $PWD/files/$1 $HOME/$1
+}
+
+copy_file(){
+  print "Copying $1"
+  cp $PWD/files/$1 $HOME/$1
 }
 
 link_dot_file(){
   print "Linking $1"
-  ln -s ../files/$1 $HOME/.$1
+  ln -s $PWD/files/$1 $HOME/.$1
 }
 
-if ! file_exists Brewfile ; then
-  link_file Brewfile
+if ! file_exists .Brewfile ; then
+  link_dot_file Brewfile
 fi
 
 if ! file_exists .profile ; then
@@ -24,6 +30,10 @@ fi
 
 if ! file_exists .gitconfig ; then
   link_dot_file gitconfig
+fi
+
+if ! file_exists .gitconfig-work ; then
+  link_dot_file gitconfig-work
 fi
 
 if ! file_exists .editorconfig ; then

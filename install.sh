@@ -1,19 +1,20 @@
-source ./scripts/helpers.sh
-
-echo "installing brew"
-./scripts/brew.sh
+#!/bin/bash
+source $PWD/scripts/helpers.sh
 
 echo "installing personal files"
-./scripts/personal-settings.sh
+sh $PWD/scripts/personal-settings.sh
+
+echo "installing brew"
+sh $PWD/scripts/brew.sh
 
 echo "installing zsh"
-./scripts/zsh.sh
+sh $PWD/scripts/zsh.sh
 
 echo "installing mac settings"
-./scripts/mac-settings.sh
+sh $PWD/scripts/mac-settings.sh
 
 echo "installing nvm"
-./scripts/nvm.sh
+sh $PWD/scripts/nvm.sh
 
 echo "setting up npm"
-./scripts/npm.sh
+sh $PWD/scripts/npm.sh
