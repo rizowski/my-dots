@@ -14,4 +14,4 @@ fi
 
 print "Installing globals"
 
-npm i -g eslint eslint-config-rizowski
+npm i -g eslint nodemon eslint-config-rizowski cwtail serverless@1.12 updtr babel-eslint

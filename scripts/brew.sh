@@ -11,3 +11,4 @@ brew upgrade -y
 
 brew bundle --global
 brew link "git"
+brew prune

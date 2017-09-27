@@ -1,4 +1,6 @@
 set completion-ignore-case on
+export NVM_AUTO_USE=true
+. `brew --prefix`/etc/profile.d/z.sh
 
 # place this after nvm initialization!
 autoload -U add-zsh-hook
@@ -19,6 +21,8 @@ load-nvmrc() {
     nvm use default
   fi
 }
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
 
 # cat syntax highlighting
 cat() {
@@ -28,5 +32,4 @@ cat() {
     [[ -n $colored ]] && echo "$colored" || echo "$out"
 }
 
-. `brew --prefix`/etc/profile.d/z.sh
 load-nvmrc
