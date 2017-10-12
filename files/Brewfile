@@ -1,15 +1,22 @@
-tap "caskroom/cask"
-tap "caskroom/fonts"
+# https://github.com/Homebrew/homebrew-bundle#usage
+# https://github.com/mas-cli/mas
+# https://caskroom.github.io/
 tap "homebrew/core"
+tap "homebrew/bundle"
+tap "caskroom/fonts"
+tap "caskroom/cask"
 
 cask "java"
 
+brew "mas"
 brew "aws-elasticbeanstalk"
 brew "couchdb"
 brew "git"
 brew "ffmpeg"
 brew "gnupg"
+brew "python3"
 brew "ruby"
+brew "vim"
 brew "z"
 brew "zsh"
 brew "zsh-completions"
@@ -23,7 +30,6 @@ cask "dash"
 cask "discord"
 cask "divvy"
 cask "dropbox"
-cask "font-fira-code"
 cask "gitify"
 cask "google-chrome"
 cask "iterm2"
@@ -34,7 +40,17 @@ cask "resilio-sync"
 cask "slack"
 cask "spotify"
 cask "spotify-notifications"
-cask "sublime"
+cask "steam"
 cask "sublime-text"
 cask "teamviewer"
 cask "visual-studio-code"
+cask "caskroom/fonts/font-fira-code"
+
+mas "GIF Brewery 3", id: 1081413713
+mas "Fantastical 2", id: 975937182
+mas "Affinity Photo", id: 824183456
+mas "Xcode", id: 497799835
+mas "Airmail 3", id: 918858936
+mas "Deliveries", id: 924726344
+mas "Magnet", id: 441258766
+mas "DaisyDisk", id: 411643860
