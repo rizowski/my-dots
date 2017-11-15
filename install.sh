@@ -14,8 +14,5 @@ echo "installing mac settings"
 echo "Skipping Mac settings"
 # sh $PWD/scripts/mac-settings.sh
 
-echo "installing nvm"
-sh $PWD/scripts/nvm.sh
-
 echo "setting up npm"
 sh $PWD/scripts/npm.sh
