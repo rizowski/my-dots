@@ -10,7 +10,8 @@ sh $PWD/scripts/brew.sh
 echo "installing zsh"
 sh $PWD/scripts/zsh.sh
 
-# echo "installing mac settings"
+echo "installing mac settings"
+echo "Skipping Mac settings"
 # sh $PWD/scripts/mac-settings.sh
 
 echo "installing nvm"

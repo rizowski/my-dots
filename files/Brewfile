@@ -1,21 +1,21 @@
-# https://github.com/Homebrew/homebrew-bundle#usage
-# https://github.com/mas-cli/mas
-# https://caskroom.github.io/
 tap "homebrew/core"
 tap "homebrew/bundle"
 tap "caskroom/fonts"
+tap "caskroom/versions"
 tap "caskroom/cask"
 
 cask "java"
 
-brew "mas"
+brew "awk"
 brew "aws-elasticbeanstalk"
 brew "couchdb"
 brew "git"
 brew "ffmpeg"
 brew "gnupg"
+brew "mas"
 brew "python3"
 brew "ruby"
+brew "tree"
 brew "vim"
 brew "z"
 brew "zsh"
@@ -27,6 +27,7 @@ cask "android-platform-tools"
 cask "atom"
 cask "caffeine"
 cask "dash"
+cask "deckhub"
 cask "discord"
 cask "divvy"
 cask "dropbox"
@@ -35,7 +36,9 @@ cask "google-chrome"
 cask "iterm2"
 cask "keka"
 cask "keybase"
+cask "ngrok"
 cask "p4merge"
+cask "plex-media-player"
 cask "resilio-sync"
 cask "slack"
 cask "spotify"
@@ -46,11 +49,13 @@ cask "teamviewer"
 cask "visual-studio-code"
 cask "caskroom/fonts/font-fira-code"
 
-mas "GIF Brewery 3", id: 1081413713
-mas "Fantastical 2", id: 975937182
 mas "Affinity Photo", id: 824183456
-mas "Xcode", id: 497799835
 mas "Airmail 3", id: 918858936
-mas "Deliveries", id: 924726344
-mas "Magnet", id: 441258766
 mas "DaisyDisk", id: 411643860
+mas "Deliveries", id: 924726344
+mas "Fantastical 2", id: 975937182
+mas "Gemini 2", id: 1090488118
+mas "GIF Brewery 3", id: 1081413713
+mas "Magnet", id: 441258766
+mas "Trello", id: 1278508951
+mas "WhatsApp", id: 1147396723

@@ -16,8 +16,8 @@ link_dot_file(){
   ln -s $PWD/files/$1 $HOME/.$1
 }
 
-if ! file_exists .Brewfile ; then
-  link_dot_file Brewfile
+if ! file_exists Brewfile ; then
+  link_file Brewfile
 fi
 
 if ! file_exists .profile ; then
