@@ -6,10 +6,9 @@ if ! command_exists brew ; then
 fi
 
 brew update
-# brew tap "Homebrew/bundle"
 brew upgrade -y
 
-brew bundle
+brew bundle --global
 brew link "git"
 brew prune
 # brew bundle cleanup --force

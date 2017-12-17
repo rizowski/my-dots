@@ -7,6 +7,9 @@ sh $PWD/scripts/personal-settings.sh
 echo "installing brew"
 sh $PWD/scripts/brew.sh
 
+echo "installing nvm"
+sh $PWD/scripts/nvm.sh
+
 echo "installing zsh"
 sh $PWD/scripts/zsh.sh
 

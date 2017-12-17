@@ -1,6 +1,9 @@
 set completion-ignore-case on
 . `brew --prefix`/etc/profile.d/z.sh
 
+# https://github.com/keybase/keybase-issues/issues/1712#issuecomment-141226705
+export GPG_TTY=$(tty)
+
 # cat syntax highlighting
 cat() {
   local out colored
