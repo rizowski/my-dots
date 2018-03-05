@@ -11,4 +11,6 @@ brew upgrade -y
 brew bundle --global
 brew link "git"
 brew prune
+brew cleanup
+brew cask cleanup
 # brew bundle cleanup --force
