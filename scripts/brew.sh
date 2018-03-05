@@ -14,3 +14,6 @@ brew prune
 brew cleanup
 brew cask cleanup
 # brew bundle cleanup --force
+
+echo "Setting brew auto update job at login..."
+sudo ln -s $PWD/files/brew-update-schedule.plist /Library/LaunchDaemons
