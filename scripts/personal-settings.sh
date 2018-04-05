@@ -43,3 +43,13 @@ fi
 if ! file_exists .eslintrc ; then
   link_dot_file eslintrc
 fi
+
+if ! directory_exists .aws ; then
+  print "Creating aws folder"
+  mkdir $HOME/.aws
+fi
+
+if ! file_exists .aws/credentials ; then
+  print "Linking aws creds"
+  ln -s $PWD/files/aws-credentials $HOME/.aws/credentials
+fi

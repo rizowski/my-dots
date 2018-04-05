@@ -6,17 +6,14 @@
 [remote "origin"]
   fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
 [merge]
-  keepBackup = false
   tool = p4merge
 [mergetool "p4merge"]
-  cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge "\"$PWD/$BASE\"" "\"$PWD/$REMOTE\"" "\"$PWD/$LOCAL\"" "\"$PWD/$MERGED\""
   keepTemporaries = false
   trustExitCode = false
   keepBackup = false
-[diff]
-  tool = p4merge
-[difftool "p4merge"]
-  cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge "\"$REMOTE\"" "\"$LOCAL\""
+[mergetool]
+  keepTemporaries = false
+  prompt = false
 [commit]
   gpgsign = true
 

@@ -11,7 +11,7 @@ trim_trailing_whitespace = true
 spaces_around_brackets = inside
 indent_brace_style = K&R
 
-[*.{js,json,yml}]
+[*.{js,json,yml,sh}]
 indent_size = 2
 
 [*.md]

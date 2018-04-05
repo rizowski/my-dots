@@ -9,15 +9,16 @@ cask "java"
 brew "awk"
 brew "aws-elasticbeanstalk"
 brew "coreutils"
+brew "openssl"
 brew "couchdb"
 brew "curl"
 brew "ffmpeg"
+brew "gettext"
 brew "git"
 brew "gnupg"
 brew "gnupg@1.4"
 brew "mas"
 brew "ncdu"
-brew "python3"
 brew "ruby"
 brew "telnet"
 brew "tree"
@@ -31,19 +32,26 @@ cask "1password"
 cask "alfred"
 cask "android-platform-tools"
 cask "atom"
+cask "boostnote"
 cask "caffeine"
+cask "charles"
+cask "cyberduck"
 cask "dash"
 cask "deckhub"
 cask "discord"
 cask "divvy"
 cask "dropbox"
+cask "expressions"
 cask "gitify"
 cask "google-chrome"
+cask "hosts"
+cask "hyper"
 cask "iterm2"
 cask "keka"
 cask "keybase"
 cask "ngrok"
 cask "p4merge"
+cask "paw"
 cask "plex-media-player"
 cask "resilio-sync"
 cask "slack"
@@ -53,16 +61,20 @@ cask "steam"
 cask "sublime-text"
 cask "teamviewer"
 cask "visual-studio-code"
+cask "vlc"
 cask "ynab"
 cask "caskroom/fonts/font-fira-code"
 
 mas "Affinity Photo", id: 824183456
 mas "Airmail 3", id: 918858936
+mas "CleanMyDrive 2", id: 523620159
 mas "DaisyDisk", id: 411643860
 mas "Deliveries", id: 924726344
 mas "Fantastical 2", id: 975937182
 mas "Gemini 2", id: 1090488118
 mas "GIF Brewery 3", id: 1081413713
 mas "Magnet", id: 441258766
+mas "Quiver", id: 866773894
 mas "Trello", id: 1278508951
+mas "Tweetbot", id: 557168941
 mas "WhatsApp", id: 1147396723
