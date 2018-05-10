@@ -24,6 +24,11 @@ if ! file_exists .profile ; then
   link_dot_file profile
 fi
 
+if ! file_exists .work-profile ; then
+  link_dot_file work-profile
+fi
+
+
 if ! file_exists .zshrc ; then
   link_dot_file zshrc
 fi
