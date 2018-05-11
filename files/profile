@@ -1,9 +1,16 @@
+# Enabled zsh-nvm plugin
 export NVM_AUTO_USE=true
-set completion-ignore-case on
-. `brew --prefix`/etc/profile.d/z.sh
+
+# Set curl path
+export PATH="/usr/local/opt/curl/bin:$PATH"
 
 # https://github.com/keybase/keybase-issues/issues/1712#issuecomment-141226705
 export GPG_TTY=$(tty)
+
+# who cares about casing? I don't
+set completion-ignore-case on
+
+. `brew --prefix`/etc/profile.d/z.sh
 
 # cat syntax highlighting
 cat() {
@@ -12,8 +19,5 @@ cat() {
   colored=$(echo $out | pygmentize -f console -g 2>/dev/null)
   [[ -n $colored ]] && echo "$colored" || echo "$out"
 }
-
-# Set curl path
-export PATH="/usr/local/opt/curl/bin:$PATH"
 
 source ~/.work-profile

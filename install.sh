@@ -1,24 +1,31 @@
 #!/bin/bash
 source $PWD/scripts/helpers.sh
 
-echo "installing personal files"
+echo "Installing personal files"
 sh $PWD/scripts/personal-settings.sh
+clear
 
-echo "installing brew"
+echo "Installing brew"
 sh $PWD/scripts/brew.sh
+clear
 
-echo "installing nvm"
+echo "Installing nvm"
 sh $PWD/scripts/nvm.sh
+clear
 
-echo "installing zsh"
+echo "Installing zsh"
 sh $PWD/scripts/zsh.sh
+clear
 
 # echo "installing mac settings"
 # echo "Skipping Mac settings"
 # sh $PWD/scripts/mac-settings.sh
+# clear
 
-echo "setting up npm"
+echo "Setting up npm"
 sh $PWD/scripts/npm.sh
+clear
 
-echo "setting up yarn"
+echo "Setting up yarn"
 sh $PWD/scripts/yarn.sh
+clear

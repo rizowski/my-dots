@@ -10,5 +10,6 @@ YARN_VERSION="$(yarn --version)"
 
 print "YARN Version: $YARN_VERSION"
 
-print "Installing globals"
-yarn global add eslint nodemon cwtail eslint-config-rizowski updtr babel-eslint eslint-watch mocha
+printf "Installing globals"
+yarn global add eslint nodemon cwtail eslint-config-rizowski updtr babel-eslint eslint-watch mocha > /dev/null
+echo " ✓"

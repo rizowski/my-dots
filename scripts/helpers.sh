@@ -27,3 +27,33 @@ load_nvm() {
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 }
+
+update_gitrepo() {
+  local name=$(basename $1)
+  echo "Would you like to update $name (Y/n)?"
+  select result in Yes No
+  do
+    if [[ $result =~ ^[Yy]([Ee][Ss])?$ ]] || [[ -z $result ]]; then
+      echo "Updating $1..."
+      git -C $1 pull > /dev/null
+      echo
+    fi
+    break;
+  done
+}
+
+install_or_update() {
+  local name=$(basename $2)
+  local DIRECTORY="$1/$name"
+
+  if [ ! -d "$DIRECTORY" ]; then
+    echo "Installing $name"
+
+    git clone $2 $DIRECTORY
+    echo "$name installed"
+  else
+    update_gitrepo $DIRECTORY
+    echo "$name updated"
+  fi
+  clear
+}
