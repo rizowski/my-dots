@@ -1,21 +1,20 @@
 #!/bin/bash
 
 brew=/usr/local/bin/brew
-logger=/usr/bin/logger
 
-$logger -t brewup "Starting to update brew"
-$brew update 2>&1  | $logger -t brewup.update
+echo "Starting to update brew"
+$brew update
 
-$logger -t brewup "Upgrading brews"
-$brew upgrade 2>&1 | $logger -t brewup.upgrade
+echo "Upgrading brews"
+$brew upgrade
 
-$logger -t brewup "Upgrading outdated software"
-$brew cask upgrade 2>&1 | $logger -t brew.upgrade
+echo "Upgrading outdated software"
+$brew cask upgrade
 
-$logger -t brewup "Cleaning up brews"
-$brew cleanup 2>&1 | $logger -t brewup.cleanup
+echo "Cleaning up brews"
+$brew cleanup
 
-$logger -t brewup "Cleaning up casks"
-$brew cask cleanup 2>&1 | $logger -t brewup.cleanup
+echo "Cleaning up casks"
+$brew cask cleanup
 
-$logger -t brewup "Completed update"
+echo "Completed update"

@@ -23,18 +23,3 @@ brew cleanup > /dev/null
 printf "."
 brew cask cleanup > /dev/null
 echo " ✓"
-
-clear
-echo "Auto update brews and casks at startup?"
-select result in Yes No
-do
-  if [[ $result =~ ^[Yy]([Ee][Ss])?$ ]] || [[ -z $result ]]; then
-    if ! [ -f /Library/LaunchDaemons/brew-update-schedule.plist ] ; then
-      sudo ln -s $PWD/files/brew-update-schedule.plist /Library/LaunchDaemons
-    else
-      print "Auto update is already enabled"
-    fi
-  fi
-
-  break;
-done

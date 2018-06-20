@@ -20,4 +20,46 @@ cat() {
   [[ -n $colored ]] && echo "$colored" || echo "$out"
 }
 
+set_ran_date(){
+  echo $(($(date +%s) / 60 / 60 / 24)) >! $1
+}
+
+check_to_update() {
+  local script=$1
+  local app=$2
+  local updateDays=${3:-7}
+  local settingsDir=~/.dot-settings
+  local settingsPath=$settingsDir/$app;
+
+  declare -i updateDays
+
+  if [ ! -d "$settingsDir" ]; then
+    mkdir $settingsDir
+  fi
+
+  if [ ! -f "$settingsPath" ]; then
+    set_ran_date "$settingsPath"
+  fi
+
+  local current=$(($(date +%s) / 60 / 60 / 24))
+  local days=$(cat $settingsPath)
+  local been=$(($current - $days))
+  declare -i days
+  declare -i been
+
+  if (($been >= $updateDays)); then
+    echo "\e[33mDo you want to update $2? \e[36m[y/n]\e[0m"
+    select result in Yes No
+    do
+      if [[ $result =~ ^[Yy]([Ee][Ss])?$ ]] || [[ -z $result ]]; then
+        sh -c $script
+      fi
+      set_ran_date "$settingsPath"
+      break
+    done
+  fi
+}
+
+check_to_update $HOME/git/personal/dot/scripts/brew-update.sh brew 7
+
 source ~/.work-profile
