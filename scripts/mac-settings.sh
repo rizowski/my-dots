@@ -1,36 +1,45 @@
-# https://github.com/mathiasbynens/dotfiles/blob/master/.macos
+# Possible Keys: https://github.com/mathiasbynens/dotfiles/blob/master/.macos
+# Howto: https://pawelgrzybek.com/change-macos-user-preferences-via-command-line/
 
-# Show all hidden files
+# Finder:
 defaults write com.apple.finder AppleShowAllFiles YES
+
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
+defaults write com.apple.finder ShowRecentTags -bool false
+defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder ShowStatusBar -bool true
+
 killall Finder
 
-# Finder: show path bar
-defaults write com.apple.finder ShowPathbar -bool true
-
-# Avoid creating .DS_Store files on network or USB volumes
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
-
-# Disable the warning when changing a file extension
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-
-# Disable the warning before emptying the Trash
-defaults write com.apple.finder WarnOnEmptyTrash -bool false
-
-# Remove Dropbox’s green checkmark icons in Finder
-# file=/Applications/Dropbox.app/Contents/Resources/emblem-dropbox-uptodate.icns
-# [ -e "${file}" ] && mv -f "${file}" "${file}.bak"
-
-# ############ Dock #############
-# Automatically hide and show the Dock
+# Dock
 defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock largesize -float 74
+defaults write com.apple.dock tilesize -float 36
 
-# ######### App store #######
-# Enable the automatic update check
-defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+# Siri
+defaults write com.apple.Siri StatusMenuVisible -bool false
 
-# Download newly available updates in background
-defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+# Touch Bar
+# https://blog.eriknicolasgomez.com/2016/11/28/managing-or-setting-the-mini-touchbar-control-strip/
+defaults write com.apple.controlstrip FullCustomized '(
+    "com.apple.system.group.brightness",
+    "com.apple.system.mission-control",
+    "com.apple.system.launchpad",
+    "com.apple.system.group.keyboard-brightness",
+    "com.apple.system.group.media",
+    "com.apple.system.group.volume",
+    "com.apple.system.screen-saver",
+    "com.apple.system.screen-lock"
+)'
+defaults write com.apple.controlstrip MiniCustomized '(
+    "com.apple.system.brightness",
+    "com.apple.system.volume",
+    "com.apple.system.mute",
+    "com.apple.system.screen-lock"
+)'
 
-# Install System data files & security updates
-defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
+killall ControlStrip

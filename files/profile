@@ -33,13 +33,8 @@ check_to_update() {
 
   declare -i updateDays
 
-  if [ ! -d "$settingsDir" ]; then
-    mkdir $settingsDir
-  fi
-
-  if [ ! -f "$settingsPath" ]; then
-    set_ran_date "$settingsPath"
-  fi
+  [ -d "$settingsDir" ] || mkdir $settingsDir
+  [ -f "$settingsPath" ] || set_ran_date "$settingsPath"
 
   local current=$(($(date +%s) / 60 / 60 / 24))
   local days=$(cat $settingsPath)

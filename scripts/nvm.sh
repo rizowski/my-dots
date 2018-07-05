@@ -13,3 +13,7 @@ load_nvm
 nvm i 8.10.0
 nvm i 6.10.3
 nvm alias default 8
+nvm use default
+
+npm config delete prefix
+npm config set prefix $NVM_DIR/versions/node/v8.10.0
