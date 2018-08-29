@@ -11,10 +11,7 @@ $brew upgrade
 echo "Upgrading outdated software"
 $brew cask upgrade
 
-echo "Cleaning up brews"
+echo "Cleaning up casks and brews"
 $brew cleanup
-
-echo "Cleaning up casks"
-$brew cask cleanup
 
 echo "Completed update"
