@@ -9,10 +9,6 @@ echo "Installing brew"
 sh $PWD/scripts/brew.sh
 clear
 
-echo "Installing nvm"
-sh $PWD/scripts/nvm.sh
-clear
-
 echo "Installing zsh"
 sh $PWD/scripts/zsh.sh
 clear

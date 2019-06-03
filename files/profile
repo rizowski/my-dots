@@ -1,6 +1,3 @@
-# Enabled zsh-nvm plugin
-export NVM_AUTO_USE=true
-
 # Set curl path
 export PATH="/usr/local/opt/curl/bin:$PATH"
 
@@ -11,14 +8,6 @@ export GPG_TTY=$(tty)
 set completion-ignore-case on
 
 . `brew --prefix`/etc/profile.d/z.sh
-
-# cat syntax highlighting
-cat() {
-  local out colored
-  out=$(/bin/cat $@)
-  colored=$(echo $out | pygmentize -f console -g 2>/dev/null)
-  [[ -n $colored ]] && echo "$colored" || echo "$out"
-}
 
 set_ran_date(){
   echo $(($(date +%s) / 60 / 60 / 24)) >! $1
@@ -58,3 +47,31 @@ check_to_update() {
 check_to_update $HOME/git/personal/dot/scripts/brew-update.sh brew 7
 
 source ~/.work-profile
+
+# added by Snowflake SnowSQL installer v1.0
+export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+export PATH=/Users/rizowski/.fnm/current/bin:$PATH
+export FNM_MULTISHELL_PATH=/Users/rizowski/.fnm/current
+export FNM_DIR=/Users/rizowski/.fnm
+export FNM_NODE_DIST_MIRROR=https://nodejs.org/dist
+export FNM_LOGLEVEL=all
+
+      autoload -U add-zsh-hook
+      _fnm_autoload_hook () {
+        if [[ -f .node-version && -r .node-version ]]; then
+          echo "fnm: Found .node-version"
+          fnm use
+        elif [[ -f .nvmrc && -r .nvmrc ]]; then
+          echo "fnm: Found .nvmrc"
+          fnm use
+        fi
+      }
+
+      add-zsh-hook chpwd _fnm_autoload_hook \
+        && _fnm_autoload_hook

@@ -1,80 +1,121 @@
-tap "homebrew/core"
 tap "homebrew/bundle"
-tap "caskroom/fonts"
-tap "caskroom/versions"
-tap "caskroom/cask"
-
-cask "java"
+tap "homebrew/cask"
+tap "homebrew/cask-fonts"
+tap "homebrew/cask-versions"
+tap "homebrew/core"
+tap "homebrew/services"
+tap "schniz/tap"
+tap "tylerbrock/saw"
 
 brew "awk"
 brew "aws-elasticbeanstalk"
-brew "coreutils"
 brew "openssl"
-brew "couchdb"
-brew "curl"
-brew "ffmpeg"
+brew "awscli"
+brew "bat"
 brew "gettext"
+brew "coreutils"
+brew "curl"
+brew "dfu-util"
+brew "ffmpeg"
 brew "git"
 brew "gnupg"
 brew "gnupg@1.4"
+brew "imagemagick@6"
 brew "mas"
 brew "ncdu"
-brew "ruby"
+brew "nethogs"
+brew "ruby", link: true
 brew "telnet"
+brew "terraform"
 brew "tree"
 brew "vim"
+brew "watch"
+brew "watchman"
 brew "yarn"
 brew "z"
 brew "zsh"
 brew "zsh-completions"
+brew "schniz/tap/fnm"
+brew "tylerbrock/saw/saw"
 
 cask "1password"
+cask "adoptopenjdk8"
 cask "alfred"
 cask "android-platform-tools"
+cask "appcleaner"
 cask "atom"
-cask "boostnote"
+cask "authy"
+cask "balenaetcher"
 cask "caffeine"
+cask "caprine"
 cask "charles"
 cask "cyberduck"
 cask "dash"
 cask "deckhub"
 cask "discord"
 cask "divvy"
+cask "docker"
+cask "dozer"
 cask "dropbox"
 cask "expressions"
+cask "firefox-developer-edition"
+cask "font-fira-code"
+cask "font-firacode-nerd-font"
+cask "franz"
 cask "gitify"
 cask "google-chrome"
-cask "hosts"
 cask "hyper"
 cask "iterm2"
 cask "keka"
 cask "keybase"
+cask "little-snitch"
 cask "ngrok"
 cask "p4v"
 cask "paw"
 cask "plex-media-player"
+cask "postico"
+cask "postman"
+cask "private-internet-access"
+cask "rescuetime"
 cask "resilio-sync"
+cask "signal"
 cask "slack"
+cask "snowflake-snowsql"
+cask "soqlxplorer"
 cask "spotify"
 cask "spotify-notifications"
 cask "steam"
 cask "sublime-text"
+cask "tableplus"
 cask "teamviewer"
 cask "visual-studio-code"
 cask "vlc"
 cask "ynab"
-cask "caskroom/fonts/font-fira-code"
 
+mas "Affinity Designer", id: 824171161
 mas "Affinity Photo", id: 824183456
-mas "Airmail 3", id: 918858936
+mas "Airmail", id: 918858936
+mas "Amphetamine", id: 937984704
+mas "Boom 2", id: 948176063
 mas "CleanMyDrive 2", id: 523620159
 mas "DaisyDisk", id: 411643860
 mas "Deliveries", id: 924726344
-mas "Fantastical 2", id: 975937182
+mas "Downlink", id: 1454269192
+mas "Fantastical", id: 975937182
 mas "Gemini 2", id: 1090488118
 mas "GIF Brewery 3", id: 1081413713
+mas "Jump Desktop", id: 524141863
 mas "Magnet", id: 441258766
+mas "Medis", id: 1063631769
+mas "Microsoft Remote Desktop", id: 1295203466
+mas "Numbers", id: 409203825
+mas "Paprika Recipe Manager 3", id: 1303222628
+mas "Parcel", id: 639968404
+mas "PDF Expert", id: 1055273043
 mas "Quiver", id: 866773894
+mas "Spark", id: 1176895641
 mas "Trello", id: 1278508951
 mas "Tweetbot", id: 557168941
+mas "Vimeo", id: 1356686763
 mas "WhatsApp", id: 1147396723
+mas "Xcode", id: 497799835
