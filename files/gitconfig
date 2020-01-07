@@ -24,3 +24,8 @@
 
 [includeIf "gitdir:~/git/vs/**"]
   path = ~/.gitconfig-work
+
+[includeIf "gitdir:~/git/workout/**"]
+  name = Colten Rouska
+  email = crouska@gmail.com
+  signingkey = F5C4A8AEAA463AD9879DB149F82640A0AEC7A210

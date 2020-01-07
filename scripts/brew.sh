@@ -8,7 +8,7 @@ fi
 printf "Updating and upgrading brews"
 brew update > /dev/null
 printf "."
-brew upgrade -y > /dev/null
+brew upgrade > /dev/null
 printf "."
 
 brew bundle --global > /dev/null
@@ -17,9 +17,5 @@ brew link "git" > /dev/null 2>&1
 echo " ✓"
 
 printf "Cleaning up the mess"
-brew prune > /dev/null
-printf "."
 brew cleanup > /dev/null
-printf "."
-brew cask cleanup > /dev/null
 echo " ✓"

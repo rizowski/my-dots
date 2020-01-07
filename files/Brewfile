@@ -6,29 +6,35 @@ tap "homebrew/core"
 tap "homebrew/services"
 tap "schniz/tap"
 tap "tylerbrock/saw"
-
+cask "adoptopenjdk8"
+brew "ansible"
 brew "awk"
 brew "aws-elasticbeanstalk"
-brew "openssl"
 brew "awscli"
 brew "bat"
 brew "gettext"
 brew "coreutils"
+brew "credstash"
 brew "curl"
 brew "dfu-util"
+brew "doctl"
+brew "elixir"
+brew "exercism"
 brew "ffmpeg"
 brew "git"
 brew "gnupg"
 brew "gnupg@1.4"
 brew "imagemagick@6"
+brew "kompose"
 brew "mas"
 brew "ncdu"
-brew "nethogs"
+brew "psqlodbc"
 brew "ruby", link: true
 brew "telnet"
 brew "terraform"
 brew "tree"
 brew "vim"
+brew "wakeonlan"
 brew "watch"
 brew "watchman"
 brew "yarn"
@@ -37,15 +43,17 @@ brew "zsh"
 brew "zsh-completions"
 brew "schniz/tap/fnm"
 brew "tylerbrock/saw/saw"
-
 cask "1password"
-cask "adoptopenjdk8"
 cask "alfred"
+cask "android-messages"
 cask "android-platform-tools"
 cask "appcleaner"
 cask "atom"
 cask "authy"
 cask "balenaetcher"
+cask "balsamiq-mockups"
+cask "boom"
+cask "brave-browser"
 cask "caffeine"
 cask "caprine"
 cask "charles"
@@ -56,6 +64,7 @@ cask "discord"
 cask "divvy"
 cask "docker"
 cask "dozer"
+cask "drawio"
 cask "dropbox"
 cask "expressions"
 cask "firefox-developer-edition"
@@ -64,7 +73,8 @@ cask "font-firacode-nerd-font"
 cask "franz"
 cask "gitify"
 cask "google-chrome"
-cask "hyper"
+cask "graphql-playground"
+cask "insomnia"
 cask "iterm2"
 cask "keka"
 cask "keybase"
@@ -76,6 +86,7 @@ cask "plex-media-player"
 cask "postico"
 cask "postman"
 cask "private-internet-access"
+cask "realm-studio"
 cask "rescuetime"
 cask "resilio-sync"
 cask "signal"
@@ -88,23 +99,25 @@ cask "steam"
 cask "sublime-text"
 cask "tableplus"
 cask "teamviewer"
+cask "ultimaker-cura"
 cask "visual-studio-code"
 cask "vlc"
-cask "ynab"
-
-mas "Affinity Designer", id: 824171161
 mas "Affinity Photo", id: 824183456
 mas "Airmail", id: 918858936
 mas "Amphetamine", id: 937984704
+mas "Bear", id: 1091189122
 mas "Boom 2", id: 948176063
 mas "CleanMyDrive 2", id: 523620159
-mas "DaisyDisk", id: 411643860
+mas "Day One", id: 1055511498
 mas "Deliveries", id: 924726344
 mas "Downlink", id: 1454269192
 mas "Fantastical", id: 975937182
+mas "Final Cut Pro", id: 424389933
 mas "Gemini 2", id: 1090488118
 mas "GIF Brewery 3", id: 1081413713
+mas "iStat Menus", id: 1319778037
 mas "Jump Desktop", id: 524141863
+mas "LanScan", id: 472226235
 mas "Magnet", id: 441258766
 mas "Medis", id: 1063631769
 mas "Microsoft Remote Desktop", id: 1295203466
@@ -112,10 +125,12 @@ mas "Numbers", id: 409203825
 mas "Paprika Recipe Manager 3", id: 1303222628
 mas "Parcel", id: 639968404
 mas "PDF Expert", id: 1055273043
-mas "Quiver", id: 866773894
 mas "Spark", id: 1176895641
+mas "Todoist", id: 585829637
 mas "Trello", id: 1278508951
 mas "Tweetbot", id: 557168941
 mas "Vimeo", id: 1356686763
 mas "WhatsApp", id: 1147396723
+mas "WiFi Explorer Lite", id: 1408727408
+mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835

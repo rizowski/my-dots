@@ -48,6 +48,10 @@ if ! file_exists .eslintrc ; then
   link_dot_file eslintrc
 fi
 
+if ! file_exists .prettierrc ; then
+  link_dot_file prettierrc
+fi
+
 if ! directory_exists .aws ; then
   print "Creating aws folder"
   mkdir $HOME/.aws

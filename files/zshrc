@@ -32,7 +32,3 @@ alias compose='docker-compose'
 # fnm
 # export PATH=$HOME/.fnm:$PATH
 # eval `fnm env`
-
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /Users/rizowski/.config/yarn/global/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/rizowski/.config/yarn/global/node_modules/tabtab/.completions/slss.zsh
