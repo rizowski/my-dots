@@ -5,6 +5,10 @@ echo "Installing personal files"
 sh $PWD/scripts/personal-settings.sh
 clear
 
+echo "Installing personal commands"
+sh $PWD/scripts/custom-commands.sh
+clear
+
 echo "Installing brew"
 sh $PWD/scripts/brew.sh
 clear
