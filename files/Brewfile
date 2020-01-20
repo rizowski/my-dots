@@ -54,7 +54,6 @@ cask "atom"
 cask "authy"
 cask "balenaetcher"
 cask "balsamiq-mockups"
-cask "boom"
 cask "brave-browser"
 cask "caffeine"
 cask "caprine"
@@ -108,22 +107,17 @@ cask "vlc"
 mas "Affinity Photo", id: 824183456
 mas "Airmail", id: 918858936
 mas "Amphetamine", id: 937984704
-mas "Bear", id: 1091189122
 mas "Boom 2", id: 948176063
 mas "CleanMyDrive 2", id: 523620159
 mas "Day One", id: 1055511498
 mas "Deliveries", id: 924726344
-mas "Downlink", id: 1454269192
 mas "Fantastical", id: 975937182
 mas "Final Cut Pro", id: 424389933
-mas "Gemini 2", id: 1090488118
 mas "GIF Brewery 3", id: 1081413713
-mas "iStat Menus", id: 1319778037
 mas "Jump Desktop", id: 524141863
 mas "LanScan", id: 472226235
 mas "Magnet", id: 441258766
 mas "Medis", id: 1063631769
-mas "Microsoft Remote Desktop", id: 1295203466
 mas "Numbers", id: 409203825
 mas "Paprika Recipe Manager 3", id: 1303222628
 mas "Parcel", id: 639968404
