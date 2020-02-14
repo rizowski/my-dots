@@ -25,10 +25,12 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 source ~/.profile
 # zprof
 
-export PATH="/usr/local/sbin:$PATH"
-alias p4merge='/Applications/p4merge.app/Contents/MacOS/p4merge'
-alias compose='docker-compose'
-
-# fnm
-# export PATH=$HOME/.fnm:$PATH
-# eval `fnm env`
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/rizowski/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/rizowski/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/rizowski/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/rizowski/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/rizowski/.config/yarn/global/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/rizowski/.config/yarn/global/node_modules/tabtab/.completions/slss.zsh

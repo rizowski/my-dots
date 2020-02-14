@@ -61,3 +61,8 @@ if ! file_exists .aws/credentials ; then
   print "Linking aws creds"
   ln -s $PWD/files/aws-credentials $HOME/.aws/credentials
 fi
+
+if ! file_exists .aws/config ; then
+  print "Linking aws config"
+  ln -s $PWD/files/aws-config $HOME/.aws/config
+fi
