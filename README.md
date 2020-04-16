@@ -65,3 +65,6 @@ $ keybase pgp export
 $ keybase pgp export -q 865BBEE | gpg --import
 $ keybase pgp export -q 865BBEE --secret | gpg --allow-secret-key-import --import
 ```
+
+
+https://josnun.com/posts/managing-dotfiles-and-zsh-with-dotbot-and-antigen/

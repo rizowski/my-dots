@@ -60,17 +60,14 @@ check_to_update $HOME/git/personal/dot/scripts/brew-update.sh brew 7
 
 source ~/.work-profile
 
-# added by Snowflake SnowSQL installer v1.0
-export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
-
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
   PATH="$HOME/bin:$PATH"
 fi
 
-export PATH=/Users/rizowski/.fnm/current/bin:$PATH
-export FNM_MULTISHELL_PATH=/Users/rizowski/.fnm/current
-export FNM_DIR=/Users/rizowski/.fnm
+export PATH=$HOME/.fnm/current/bin:$PATH
+export FNM_MULTISHELL_PATH=$HOME/.fnm/current
+export FNM_DIR=$HOME/.fnm
 export FNM_NODE_DIST_MIRROR=https://nodejs.org/dist
 export FNM_LOGLEVEL=all
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
@@ -95,7 +92,5 @@ _fnm_autoload_hook () {
 
 add-zsh-hook chpwd _fnm_autoload_hook \
   && _fnm_autoload_hook
-
-if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
 fpath=(/usr/local/share/zsh-completions $fpath)

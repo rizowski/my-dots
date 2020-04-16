@@ -23,6 +23,16 @@ defaults write com.apple.dock tilesize -float 36
 # Siri
 defaults write com.apple.Siri StatusMenuVisible -bool false
 
+# Keyboard repeat
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
+
+# Trackpad
+# enable tap to click for this user and for the login screen
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
 # Touch Bar
 # https://blog.eriknicolasgomez.com/2016/11/28/managing-or-setting-the-mini-touchbar-control-strip/
 defaults write com.apple.controlstrip FullCustomized '(

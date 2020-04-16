@@ -1,0 +1,75 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: ['~']
+
+- clean:
+    ~/:
+      force: true
+
+- shell:
+  - git submodule update --init --recursive
+  - [/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)", Installing brew]
+  - brew install git gpg
+  - [mkdir -p ~/.aws, create aws folder]
+  - [mkdir -p ~/git, create git dir]
+  - [mkdir -p ~/git/personal, create personal git dir]
+  - [mkdir -p ~/git/work, create work git dir]
+  - [mkdir -p ~/.antigen]
+  - [curl -L git.io/antigen > ~/.antigen/antigen.zsh, installing antigen]
+
+- link:
+    ~/.aliases:
+      path: files/aliases
+    ~/.Brewfile:
+      path: files/Brewfile
+    ~/.profile: 
+      path: files/profile
+    ~/.work-profile: 
+      path: files/work-profile
+    ~/.zshrc: 
+      path: files/zshrc
+    ~/.vimrc: 
+      path: files/vimrc
+    ~/.gitconfig: 
+      path: files/gitconfig
+    ~/.gitignore:
+      path: files/gitignore
+    ~/.gitconfig-work: 
+      path: files/gitconfig-work
+    ~/.prettierrc: 
+      path: files/prettierrc
+    ~/.aws/config:
+      path: files/aws-config
+    ~/.aws/credentials:
+      path: files/aws-credentials
+    ~/.editorconfig:
+      path: files/editorconfig
+    # ~/Library/Application\ Support/Code/User/settings.json: 
+    #   path: files/vscode-settings.json
+
+- brewfile:
+    - ~/.Brewfile
+
+- shell:
+  -
+    command: "[ -d \"$HOME/.oh-my-zsh\" ] || git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh"
+    description: initializing oh-my-zsh
+    stderr: true
+    stdout: true
+  - 
+    command: ./scripts/mac-settings.sh
+    stdout: true
+    description: Updating mac settings
+  - 
+    command: ./scripts/npm.sh
+    stdin: true
+    stdout: true
+    description: Loging in npm user
+  - 
+    command: ./scripts/yarn.sh
+    stdout: true
+    description: Installing globals with yarn
+  - [brew cleanup, Cleaning up brew mess]

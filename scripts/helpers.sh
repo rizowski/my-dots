@@ -42,13 +42,9 @@ install_or_update() {
   local DIRECTORY="$1/$name"
 
   if [ ! -d "$DIRECTORY" ]; then
-    echo "Installing $name"
-
     git clone --depth 1 $2 $DIRECTORY
-    echo "$name installed"
+    print "$name installed"
   else
     update_gitrepo $DIRECTORY
-    echo "$name updated"
   fi
-  clear
 }

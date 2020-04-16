@@ -1,8 +1,6 @@
 #!/bin/bash
 source $PWD/scripts/helpers.sh
 
-[ -d "$HOME/.oh-my-zsh" ] || git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-
 PLUGINS=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins
 THEMES=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes
 
