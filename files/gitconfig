@@ -22,7 +22,7 @@
   email = crouska@gmail.com
   signingkey = F5C4A8AEAA463AD9879DB149F82640A0AEC7A210
 
-[includeIf "gitdir:~/git/vs/**"]
+[includeIf "gitdir:~/git/work/**"]
   path = ~/.gitconfig-work
 
 [includeIf "gitdir:~/git/workout/**"]

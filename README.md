@@ -1,5 +1,20 @@
 # My .Dots
 
+## Getting started
+
+1. Clone down the repo
+1. run `./install`
+1. follow prompts
+1. done
+
+### Tech used:
+
+- [dotbot](https://github.com/anishathalye/dotbot)
+- [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
+  - [antigen](https://github.com/zsh-users/antigen)
+- [homebrew](https://brew.sh)
+  - [brew-bundle](https://github.com/Homebrew/homebrew-bundle)
+
 ## Tips
 
 To remove `work-profile` and `aws-credentials` from being tracked on git. run the following:
@@ -8,15 +23,15 @@ To remove `work-profile` and `aws-credentials` from being tracked on git. run th
 git update-index --assume-unchanged ./files/work-profile ./files/aws-credentials
 ```
 
-
 ## GPG Signing
 
 ### Creating a new key
- 
+
 Requirements:
-  - GPG (`brew install gpg`)
-  - Git >= v2.0 (`brew install git && brew link git`)
-  - [Keybase.app](https://keybase.io/) (`brew cask install keybase`)
+
+- GPG (`brew install gpg`)
+- Git >= v2.0 (`brew install git && brew link git`)
+- [Keybase.app](https://keybase.io/) (`brew cask install keybase`)
 
 ```sh
 $ keybase pgp gen --multi
@@ -47,6 +62,7 @@ $ git config --global commit.gpgsign true
 ```
 
 #### Saving Generated Key to Github
+
 ```
 $ keybase pgp export -q CB86A866E870EE00 | pbcopy && open https://github.com/settings/keys
 ```
