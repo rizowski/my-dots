@@ -56,7 +56,7 @@ swap_npm_user() {
 
 add-zsh-hook chpwd swap_npm_user && swap_npm_user
 
-check_to_update $HOME/git/personal/dot/scripts/brew-update.sh brew 7
+check_to_update /usr/local/bin/brew-update brew 7
 
 source ~/.work-profile
 
@@ -73,10 +73,6 @@ export FNM_LOGLEVEL=all
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 export RCRC=$HOME/dotfiles/rcrc
 export PATH="/usr/local/sbin:$PATH"
-
-alias p4merge='/Applications/p4merge.app/Contents/MacOS/p4merge'
-alias compose='docker-compose'
-alias nvm='fnm'
 
 autoload -U add-zsh-hook
 

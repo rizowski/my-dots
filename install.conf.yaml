@@ -8,38 +8,45 @@
 - clean:
     ~/:
       force: true
+    ~/Library/Application\ Support/Code/User/settings.json:
+      force: true
+- create:
+    - ~/git
+    - ~/git/personal
+    - ~/git/work
+    - ~/.antigen
 
 - shell:
   - git submodule update --init --recursive
   - [/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)", Installing brew]
   - brew install git gpg
-  - [mkdir -p ~/.aws, create aws folder]
-  - [mkdir -p ~/git, create git dir]
-  - [mkdir -p ~/git/personal, create personal git dir]
-  - [mkdir -p ~/git/work, create work git dir]
-  - [mkdir -p ~/.antigen]
+  - brew link git gpg
   - [curl -L git.io/antigen > ~/.antigen/antigen.zsh, installing antigen]
 
 - link:
     ~/.aliases:
       path: files/aliases
     ~/.Brewfile:
+      if: '[ `uname` = Darwin ]'
       path: files/Brewfile
-    ~/.profile: 
+    /usr/local/bin/brew-update:
+      if: '[ `uname` = Darwin ]'
+      path: scripts/brew-update.sh
+    ~/.profile:
       path: files/profile
-    ~/.work-profile: 
+    ~/.work-profile:
       path: files/work-profile
-    ~/.zshrc: 
+    ~/.zshrc:
       path: files/zshrc
-    ~/.vimrc: 
+    ~/.vimrc:
       path: files/vimrc
-    ~/.gitconfig: 
+    ~/.gitconfig:
       path: files/gitconfig
     ~/.gitignore:
       path: files/gitignore
-    ~/.gitconfig-work: 
+    ~/.gitconfig-work:
       path: files/gitconfig-work
-    ~/.prettierrc: 
+    ~/.prettierrc:
       path: files/prettierrc
     ~/.aws/config:
       path: files/aws-config
@@ -47,7 +54,10 @@
       path: files/aws-credentials
     ~/.editorconfig:
       path: files/editorconfig
-    # ~/Library/Application\ Support/Code/User/settings.json: 
+    # ~/Library/Application\ Support/Code/User/settings.json:
+    #   if: '[ `uname` = Darwin ]'
+    #   relink: true
+    #   force: true
     #   path: files/vscode-settings.json
 
 - brewfile:
@@ -59,16 +69,16 @@
     description: initializing oh-my-zsh
     stderr: true
     stdout: true
-  - 
+  -
     command: ./scripts/mac-settings.sh
     stdout: true
     description: Updating mac settings
-  - 
+  -
     command: ./scripts/npm.sh
     stdin: true
     stdout: true
     description: Loging in npm user
-  - 
+  -
     command: ./scripts/yarn.sh
     stdout: true
     description: Installing globals with yarn
