@@ -29,3 +29,7 @@
   name = Colten Rouska
   email = crouska@gmail.com
   signingkey = F5C4A8AEAA463AD9879DB149F82640A0AEC7A210
+[core]
+	autocrlf = input
+[pull]
+	rebase = true

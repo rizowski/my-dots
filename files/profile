@@ -71,7 +71,6 @@ export FNM_DIR=$HOME/.fnm
 export FNM_NODE_DIST_MIRROR=https://nodejs.org/dist
 export FNM_LOGLEVEL=all
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
-export RCRC=$HOME/dotfiles/rcrc
 export PATH="/usr/local/sbin:$PATH"
 
 autoload -U add-zsh-hook
@@ -90,3 +89,33 @@ add-zsh-hook chpwd _fnm_autoload_hook \
   && _fnm_autoload_hook
 
 fpath=(/usr/local/share/zsh-completions $fpath)
+
+# 1Password
+opon() {
+  if [[ -z $OP_SESSION_crouska ]]; then
+    eval $(op signin crouska crouska@gmail.com)
+  fi
+}
+
+opoff() {
+  op signout
+  unset OP_SESSION_crouska
+}
+
+getpwd() {
+  opon
+  op get item "$1" |jq -r '.details.fields[] |select(.designation=="password").value'
+  opoff
+}
+
+getmfa() {
+  opon
+  op get totp "$1"
+  opoff
+}
+
+sshkey() {
+  opon
+  echo "$(op get item "acg-master" |jq -r '.details.notesPlain')"|ssh-add -
+  opoff
+}
