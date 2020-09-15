@@ -1,6 +1,8 @@
 # Set curl path
 export PATH="/usr/local/opt/curl/bin:$PATH"
 
+alias python=/usr/local/bin/python3 
+
 # https://github.com/keybase/keybase-issues/issues/1712#issuecomment-141226705
 export GPG_TTY=$(tty)
 
@@ -105,17 +107,25 @@ opoff() {
 getpwd() {
   opon
   op get item "$1" |jq -r '.details.fields[] |select(.designation=="password").value'
-  opoff
+  # opoff
 }
 
 getmfa() {
   opon
   op get totp "$1"
-  opoff
+  # opoff
 }
 
 sshkey() {
   opon
-  echo "$(op get item "acg-master" |jq -r '.details.notesPlain')"|ssh-add -
-  opoff
+  echo "$(op get item "ssh-key-$1" | jq -r '.details.notesPlain')" | ssh-add -
+  # opoff
 }
+
+sshpub() {
+  opon
+  echo "$(op get item "ssh-pub-$1" | jq -r '.details.notesPlain')" | ssh-add -
+  # opoff
+}
+
+trap opoff EXIT
