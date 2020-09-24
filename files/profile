@@ -1,8 +1,6 @@
 # Set curl path
 export PATH="/usr/local/opt/curl/bin:$PATH"
 
-alias python=/usr/local/bin/python3 
-
 # https://github.com/keybase/keybase-issues/issues/1712#issuecomment-141226705
 export GPG_TTY=$(tty)
 
