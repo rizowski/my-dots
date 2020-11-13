@@ -6,7 +6,7 @@ echo "Starting to update brew"
 $brew update
 
 echo "Upgrading outdated software"
-$brew upgrade --greedy
+$brew upgrade # --greedy
 
 echo "Cleaning up casks and brews"
 $brew cleanup
