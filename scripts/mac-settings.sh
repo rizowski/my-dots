@@ -8,6 +8,7 @@ defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+defaults write com.apple.finder FXPreferredViewStyle Nlsv
 
 defaults write com.apple.finder ShowRecentTags -bool false
 defaults write com.apple.finder ShowPathbar -bool true
@@ -24,8 +25,8 @@ defaults write com.apple.dock tilesize -float 36
 defaults write com.apple.Siri StatusMenuVisible -bool false
 
 # Keyboard repeat
-defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 7
+defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # Spaces
 defaults write com.apple.dock mru-spaces -bool false
@@ -35,6 +36,7 @@ defaults write com.apple.dock mru-spaces -bool false
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.trackpad.forceClick -int 0
 
 # Spotlight
 # Hide tray-icon
@@ -44,8 +46,6 @@ sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 # https://blog.eriknicolasgomez.com/2016/11/28/managing-or-setting-the-mini-touchbar-control-strip/
 defaults write com.apple.controlstrip FullCustomized '(
     "com.apple.system.group.brightness",
-    "com.apple.system.mission-control",
-    "com.apple.system.launchpad",
     "com.apple.system.group.keyboard-brightness",
     "com.apple.system.group.media",
     "com.apple.system.group.volume",

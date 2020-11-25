@@ -5,11 +5,6 @@
 
 - clean: ['~']
 
-- clean:
-    ~/:
-      force: true
-    ~/Library/Application\ Support/Code/User/settings.json:
-      force: true
 - create:
     - ~/git
     - ~/git/personal
@@ -63,15 +58,20 @@
 - brewfile:
     - ~/.Brewfile
 
+#  # https://github.com/DrDynamic/dotbot-sudo?ts=2
+# - sudo:
+#   - shell:
+#     - ["xcodebuild -license accept", "accept xcode license"]
+#     - ["compaudit | xargs chmod g-w", "fix file permissions"]
+
 - shell:
   -
     command: "[ -d \"$HOME/.oh-my-zsh\" ] || git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh"
     description: initializing oh-my-zsh
-    stderr: true
-    stdout: true
+    quiet: true
   -
     command: ./scripts/mac-settings.sh
-    stdout: true
+    quiet: true
     description: Updating mac settings
   -
     command: ./scripts/npm.sh
@@ -80,6 +80,15 @@
     description: Loging in npm user
   -
     command: ./scripts/yarn.sh
-    stdout: true
+    quiet: true
     description: Installing globals with yarn
   - [brew cleanup, Cleaning up brew mess]
+  -
+    command: pip3 install credstash
+    description: installing credstash
+
+# # https://github.com/sobolevn/dotbot-pip?ts=2
+# - pip:
+#     binary: /usr/local/bin/pip3
+#     requirements:
+#       credstash: 1.17.1

@@ -19,8 +19,7 @@ brew "bat"
 brew "python@3.8", link: true
 brew "circleci"
 brew "coreutils"
-brew "credstash", link: false
-brew "curl"
+brew "curl", link: true
 brew "dash", link: false
 brew "dfu-util"
 brew "doctl"
@@ -81,7 +80,6 @@ cask "expressions"
 cask "figma"
 cask "firefox-developer-edition"
 cask "font-fira-code"
-cask "font-firacode-nerd-font"
 cask "franz"
 cask "gitify"
 cask "google-chrome"
@@ -91,7 +89,6 @@ cask "insomnia-designer"
 cask "iterm2"
 cask "keka"
 cask "keybase"
-cask "little-snitch"
 cask "ngrok"
 cask "obsidian"
 cask "openvpn-connect"
@@ -102,16 +99,13 @@ cask "plex-media-player"
 cask "postico"
 cask "postman"
 cask "private-internet-access"
-cask "realm-studio"
 cask "resilio-sync"
-cask "sensei"
 cask "signal"
 cask "simplenote"
 cask "slack"
 cask "snowflake-snowsql"
 cask "soqlxplorer"
 cask "spotify"
-cask "spotify-notifications"
 cask "steam"
 cask "sublime-text"
 cask "synergy"
@@ -137,10 +131,8 @@ mas "Numbers", id: 409203825
 mas "Paprika Recipe Manager 3", id: 1303222628
 mas "PDF Expert", id: 1055273043
 mas "Spark", id: 1176895641
-mas "Todoist", id: 585829637
 mas "Trello", id: 1278508951
 mas "Tweetbot", id: 557168941
-mas "Vimeo", id: 1356686763
 mas "WhatsApp", id: 1147396723
 mas "WiFi Explorer", id: 494803304
 mas "WireGuard", id: 1451685025

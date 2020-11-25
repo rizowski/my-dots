@@ -25,6 +25,8 @@ git update-index --assume-unchanged ./files/work-profile ./files/aws-credentials
 
 ## GPG Signing
 
+TODO: https://www.engineerbetter.com/blog/yubikey-all-the-things/
+
 ### Creating a new key
 
 Requirements:
