@@ -15,7 +15,7 @@
 
 - shell:
   - git submodule update --init --recursive
-  - [/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)", Installing brew]
+  - [/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" </dev/null, installing brew]
   - brew install git gpg
   - brew link git gpg
   - [curl -L git.io/antigen > ~/.antigen/antigen.zsh, installing antigen]
