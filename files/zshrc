@@ -2,14 +2,18 @@
 source $HOME/.antigen/antigen.zsh
 antigen use oh-my-zsh
 
+antigen bundle docker-compose
 antigen bundle git
+antigen bundle z
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle colored-man-pages
+antigen bundle unixorn/autoupdate-antigen.zshplugin
+antigen bundle MichaelAquilina/zsh-you-should-use
+antigen bundle akoenig/npm-run.plugin.zsh
 antigen bundle zsh-users/zsh-history-substring-search
-antigen bundle z
-antigen bundle docker-compose
-antigen bundle npm
+
+antigen cache-gen
 
 case `uname` in
   Darwin)
@@ -23,11 +27,13 @@ esac
 
 # workaround for https://github.com/zsh-users/antigen/issues/675
 THEME=robbyrussell
+
 antigen list | grep $THEME; if [ $? -ne 0 ]; then antigen theme $THEME; fi
 # antigen theme robbyrussell
 
 antigen apply
 
+eval "$(starship init zsh)"
 
 source ~/.aliases
 

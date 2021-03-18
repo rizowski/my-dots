@@ -10,15 +10,21 @@
     - ~/git/personal
     - ~/git/work
     - ~/.antigen
+    - ~/.config
+    - ~/.gnupg/
 
 - shell:
   - git submodule update --init --recursive
-  - [/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)", Installing brew]
+  - [/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)", Installing brew]
   - brew install git gpg
   - brew link git gpg
   - [curl -L git.io/antigen > ~/.antigen/antigen.zsh, installing antigen]
 
 - link:
+    ~/.config/starship.toml:
+      path: files/starship.toml
+    ~/.gnupg/gpg-agent.conf:
+      path: files/gpg-agent.conf
     ~/.aliases:
       path: files/aliases
     ~/.Brewfile:

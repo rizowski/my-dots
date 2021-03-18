@@ -1,0 +1,38 @@
+[aws]
+format = "[$symbol$profile(\\($region\\))]($style) "
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[x](bold red)"
+
+[cmd_duration]
+format = "[$duration]($style) "
+[docker_context]
+format = "[$symbol$context]($style) "
+
+[git_branch]
+format = "[$symbol\\($branch\\)]($style) "
+
+[git_status]
+conflicted = "🏳"
+ahead = "🏎💨"
+behind = "😰"
+diverged = "😵"
+untracked = "🤷‍"
+stashed = "📦"
+modified = "📝"
+staged = '[++\($count\)](green)'
+renamed = "👅"
+deleted = "🗑"
+
+[package]
+format = "[$symbol$version]($style) "
+
+[nodejs]
+format = "[$symbol$version]($style) "
+
+[time]
+format = "🕙[\\[ $time \\]]($style) "
+
+[terraform]
+format= "[$symbol$workspace]($style) "
