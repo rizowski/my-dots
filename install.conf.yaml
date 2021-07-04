@@ -83,7 +83,7 @@
     command: ./scripts/npm.sh
     stdin: true
     stdout: true
-    description: Loging in npm user
+    description: Log in npm user
   -
     command: ./scripts/yarn.sh
     quiet: true
