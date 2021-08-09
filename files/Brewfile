@@ -9,25 +9,20 @@ tap "homebrew/services"
 tap "schniz/tap"
 tap "teamookla/speedtest"
 tap "tylerbrock/saw"
-brew "ansible"
 brew "apollo-cli"
 brew "awk"
 brew "aws-elasticbeanstalk"
-brew "awscli"
 brew "awslogs"
 brew "balena-cli"
 brew "bat"
 brew "caddy"
 brew "circleci"
-brew "cocoapods"
 brew "coreutils"
 brew "curl"
 brew "dash"
 brew "dfu-util"
 brew "doctl"
 brew "dotenv-linter"
-brew "elixir"
-brew "exercism"
 brew "harfbuzz"
 brew "webp"
 brew "ffmpeg"
@@ -36,12 +31,10 @@ brew "gh"
 brew "git"
 brew "glances"
 brew "gnupg"
-brew "gnupg@1.4", link: false
 brew "go"
 brew "helm"
-brew "imagemagick@6"
+brew "imagemagick"
 brew "jq"
-brew "kompose"
 brew "kubernetes-cli"
 brew "mas"
 brew "mkcert"
@@ -75,33 +68,27 @@ brew "teamookla/speedtest/speedtest"
 brew "tylerbrock/saw/saw"
 cask "1password"
 cask "1password-cli"
-cask "activitywatch"
 cask "adoptopenjdk8"
 cask "alfred"
 cask "android-messages"
 cask "android-platform-tools"
 cask "android-studio"
-cask "appcleaner"
+cask "appcleaner", greedy: true
 cask "authy"
-cask "balenaetcher"
-cask "barrier"
-cask "boom-3d"
-cask "brave-browser"
-cask "caffeine"
-cask "caprine"
-cask "charles"
-cask "cyberduck"
+cask "balenaetcher", greedy: true
+cask "charles", greedy: true
+cask "cyberduck", greedy: true
 cask "dash"
-cask "discord"
+cask "discord", greedy: true
 cask "docker"
-cask "dozer"
-cask "drawio"
-cask "figma"
+cask "dozer", greedy: true
+cask "drawio", greedy: true
+cask "figma", greedy: true
 cask "filebot"
 cask "firefox-developer-edition"
 cask "flutter"
-cask "font-fira-code"
-cask "font-fira-code-nerd-font"
+cask "font-fira-code", greedy: true
+cask "font-fira-code-nerd-font", greedy: true
 cask "font-lato"
 cask "font-ostrich-sans"
 cask "font-raleway"
@@ -114,40 +101,31 @@ cask "insomnia-designer"
 cask "iterm2"
 cask "keka"
 cask "keybase"
-cask "mongodb-realm-studio"
-cask "ngrok"
+cask "ngrok", greedy: true
 cask "obsidian"
-cask "openvpn-connect"
 cask "p4v"
 cask "parsec"
 cask "paw"
-cask "plex-media-player"
 cask "postman"
-cask "private-internet-access"
+cask "private-internet-access", greedy: true
 cask "resilio-sync"
 cask "simplenote"
 cask "slack"
 cask "snowflake-snowsql"
 cask "soqlxplorer"
 cask "spotify"
-cask "steam"
-cask "sublime-text"
 cask "synergy"
 cask "tableplus"
 cask "teamviewer"
 cask "ultimaker-cura"
 cask "visual-studio-code"
-cask "vlc"
 mas "Affinity Photo", id: 824183456
 mas "Airmail", id: 918858936
 mas "Amphetamine", id: 937984704
-mas "Boom 2", id: 948176063
 mas "DaisyDisk", id: 411643860
-mas "Day One", id: 1055511498
 mas "Deliveries", id: 924726344
 mas "Fantastical", id: 975937182
 mas "GIF Brewery 3", id: 1081413713
-mas "Jira", id: 1475897096
 mas "Jump Desktop", id: 524141863
 mas "LanScan", id: 472226235
 mas "Magnet", id: 441258766
@@ -158,13 +136,12 @@ mas "Paprika Recipe Manager 3", id: 1303222628
 mas "PDF Expert", id: 1055273043
 mas "Plash", id: 1494023538
 mas "Spark", id: 1176895641
-mas "Todoist", id: 585829637
 mas "Trello", id: 1278508951
 mas "Tweetbot", id: 557168941
-mas "Twitter", id: 1482454543
 mas "UTC Time", id: 1538245904
 mas "WhatsApp", id: 1147396723
 mas "WiFi Explorer", id: 494803304
 mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835
+whalebrew "whalebrew/awscli"
 whalebrew "whalebrew/travis"

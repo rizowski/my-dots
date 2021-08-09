@@ -9,6 +9,6 @@ echo "Upgrading outdated software"
 $brew upgrade # --greedy
 
 echo "Cleaning up casks and brews"
-$brew cleanup
+$brew cleanup --prune 25
 
 echo "Completed update"
