@@ -5,6 +5,10 @@ format = "[$symbol$profile(\\($region\\))]($style) "
 success_symbol = "[➜](bold green)"
 error_symbol = "[x](bold red)"
 
+[directory]
+truncation_length = 2
+truncate_to_repo = false
+
 [cmd_duration]
 format = "[$duration]($style) "
 [docker_context]

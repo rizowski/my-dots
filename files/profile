@@ -33,15 +33,11 @@ check_to_update() {
   declare -i been
 
   if (($been >= $updateDays)); then
-    echo "\e[33mDo you want to update $2? \e[36m[y/n]\e[0m"
-    select result in Yes No
-    do
-      if [[ $result =~ ^[Yy]([Ee][Ss])?$ ]] || [[ -z $result ]]; then
+    if read -q "?${YELLOW}Do you want to update ${2}? ${CYAN}[y/n]${WHITE} "; then
         sh -c $script
-      fi
+    else
       set_ran_date "$settingsPath"
-      break
-    done
+    fi
   fi
 }
 
