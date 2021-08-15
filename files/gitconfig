@@ -35,3 +35,19 @@
 	rebase = true
 [init]
 	defaultBranch = main
+
+[pager]
+  diff = delta
+  log = delta
+  reflog = delta
+  show = delta
+
+[delta]
+  features = side-by-side line-numbers decorations dark
+  plus-style = syntax "#003800"
+  minus-style = syntax "#3f0001"
+  syntax-theme = Monokai Extended
+  navigate = true
+
+[interactive]
+  diffFilter = delta --color-only

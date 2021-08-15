@@ -12,6 +12,7 @@ tap "tylerbrock/saw"
 brew "apollo-cli"
 brew "awk"
 brew "aws-elasticbeanstalk"
+brew "awscli"
 brew "awslogs"
 brew "balena-cli"
 brew "bat"
@@ -23,12 +24,15 @@ brew "dash"
 brew "dfu-util"
 brew "doctl"
 brew "dotenv-linter"
+brew "exa"
 brew "harfbuzz"
 brew "webp"
 brew "ffmpeg"
 brew "fnm"
+brew "fzf"
 brew "gh"
 brew "git"
+brew "git-delta"
 brew "glances"
 brew "gnupg"
 brew "go"
@@ -73,22 +77,22 @@ cask "alfred"
 cask "android-messages"
 cask "android-platform-tools"
 cask "android-studio"
-cask "appcleaner", greedy: true
+cask "appcleaner"
 cask "authy"
-cask "balenaetcher", greedy: true
-cask "charles", greedy: true
-cask "cyberduck", greedy: true
+cask "balenaetcher"
+cask "charles"
+cask "cyberduck"
 cask "dash"
-cask "discord", greedy: true
+cask "discord"
 cask "docker"
-cask "dozer", greedy: true
-cask "drawio", greedy: true
-cask "figma", greedy: true
+cask "dozer"
+cask "drawio"
+cask "figma"
 cask "filebot"
 cask "firefox-developer-edition"
 cask "flutter"
-cask "font-fira-code", greedy: true
-cask "font-fira-code-nerd-font", greedy: true
+cask "font-fira-code"
+cask "font-fira-code-nerd-font"
 cask "font-lato"
 cask "font-ostrich-sans"
 cask "font-raleway"
@@ -101,13 +105,13 @@ cask "insomnia-designer"
 cask "iterm2"
 cask "keka"
 cask "keybase"
-cask "ngrok", greedy: true
+cask "ngrok"
 cask "obsidian"
 cask "p4v"
 cask "parsec"
 cask "paw"
 cask "postman"
-cask "private-internet-access", greedy: true
+cask "private-internet-access"
 cask "resilio-sync"
 cask "simplenote"
 cask "slack"
@@ -117,6 +121,7 @@ cask "spotify"
 cask "synergy"
 cask "tableplus"
 cask "teamviewer"
+cask "tor-browser"
 cask "ultimaker-cura"
 cask "visual-studio-code"
 mas "Affinity Photo", id: 824183456
@@ -143,5 +148,4 @@ mas "WhatsApp", id: 1147396723
 mas "WiFi Explorer", id: 494803304
 mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835
-whalebrew "whalebrew/awscli"
 whalebrew "whalebrew/travis"
