@@ -1,8 +1,8 @@
 [submodule "dotbot-brew"]
-	path = dotbot-brew
-	url = https://github.com/d12frosted/dotbot-brew.git
-	ignore = dirty
+path = dotbot-brew
+url = https://github.com/d12frosted/dotbot-brew.git
+ignore = dirty
 [submodule "dotbot"]
-	path = dotbot
-	url = https://github.com/anishathalye/dotbot
-	ignore = dirty
+path = dotbot
+url = https://github.com/anishathalye/dotbot
+ignore = dirty

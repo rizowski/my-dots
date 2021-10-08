@@ -1,53 +1,49 @@
 [alias]
-  co = checkout
-  st = status
-  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  la = !git lg --all
+co = checkout
+st = status
+lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+la = !git lg --all
 #[remote "origin"]
 #  fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
 [merge]
-  tool = p4merge
+tool = p4merge
 [mergetool "p4merge"]
-  cmd = /Applications/p4merge.app/Contents/MacOS/p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+cmd = /Applications/p4merge.app/Contents/MacOS/p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
 [mergetool]
-  keepTemporaries = false
-  trustExitCode = false
-  keepBackup = false
-  prompt = false
+keepTemporaries = false
+trustExitCode = false
+keepBackup = false
+prompt = false
 [commit]
-  gpgsign = true
+gpgsign = true
 
 [user]
-  name = Colten Rouska
-  email = crouska@gmail.com
-  signingkey = F5C4A8AEAA463AD9879DB149F82640A0AEC7A210
+name = Colten Rouska
+email = crouska@gmail.com
+signingkey = F5C4A8AEAA463AD9879DB149F82640A0AEC7A210
 
 [includeIf "gitdir:~/git/work/**"]
-  path = ~/.gitconfig-work
+path = ~/.gitconfig-work
 
-[includeIf "gitdir:~/git/workout/**"]
-  name = Colten Rouska
-  email = crouska@gmail.com
-  signingkey = F5C4A8AEAA463AD9879DB149F82640A0AEC7A210
 [core]
-	autocrlf = input
+autocrlf = input
 [pull]
-	rebase = true
+rebase = true
 [init]
-	defaultBranch = main
+defaultBranch = main
 
 [pager]
-  diff = delta
-  log = delta
-  reflog = delta
-  show = delta
+diff = delta
+log = delta
+reflog = delta
+show = delta
 
 [delta]
-  features = side-by-side line-numbers decorations dark
-  plus-style = syntax "#003800"
-  minus-style = syntax "#3f0001"
-  syntax-theme = Monokai Extended
-  navigate = true
+features = side-by-side line-numbers decorations dark
+plus-style = syntax "#003800"
+minus-style = syntax "#3f0001"
+syntax-theme = Monokai Extended
+navigate = true
 
 [interactive]
-  diffFilter = delta --color-only
+diffFilter = delta --color-only

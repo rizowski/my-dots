@@ -8,7 +8,7 @@ NPM_VERSION="$(npm --version)"
 print "FNM Version: $FNM_VERSION"
 print "NPM Version: $NPM_VERSION"
 
-if [ -z "$NPM_USER" ] ; then
+if [ -z "$NPM_USER" ]; then
   print "Initiating npm login"
   npm login
 else

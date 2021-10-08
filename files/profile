@@ -8,10 +8,10 @@ export GPG_TTY=$(tty)
 # who cares about casing? I don't
 set completion-ignore-case on
 
-. `brew --prefix`/etc/profile.d/z.sh
+. $(brew --prefix)/etc/profile.d/z.sh
 
-set_ran_date(){
-  echo $(($(date +%s) / 60 / 60 / 24)) >! $1
+set_ran_date() {
+  echo $(($(date +%s) / 60 / 60 / 24)) $1 >!
 }
 
 check_to_update() {
@@ -19,7 +19,7 @@ check_to_update() {
   local app=$2
   local updateDays=${3:-7}
   local settingsDir=~/.dot-settings
-  local settingsPath=$settingsDir/$app;
+  local settingsPath=$settingsDir/$app
 
   declare -i updateDays
 
@@ -34,7 +34,7 @@ check_to_update() {
 
   if (($been >= $updateDays)); then
     if read -q "?${YELLOW}Do you want to update ${2}? ${CYAN}[y/n]${WHITE} "; then
-        sh -c $script
+      sh -c $script
     else
       set_ran_date "$settingsPath"
     fi
@@ -46,9 +46,9 @@ swap_npm_user() {
 
   if [[ $thedir == *"vs"* ]]; then
     ln -sf ~/git/vs/.npmrc ~/.npmrc
-   else
-     ln -sf ~/git/personal/.npmrc ~/.npmrc
-   fi
+  else
+    ln -sf ~/git/personal/.npmrc ~/.npmrc
+  fi
 }
 
 add-zsh-hook chpwd swap_npm_user && swap_npm_user
@@ -58,7 +58,7 @@ check_to_update /usr/local/bin/brew-update brew 7
 source ~/.work-profile
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
+if [ -d "$HOME/bin" ]; then
   PATH="$HOME/bin:$PATH"
 fi
 
@@ -72,7 +72,7 @@ export PATH="/usr/local/sbin:$PATH"
 
 autoload -U add-zsh-hook
 
-_fnm_autoload_hook () {
+_fnm_autoload_hook() {
   if [[ -f .node-version && -r .node-version ]]; then
     echo "fnm: Found .node-version"
     fnm use
@@ -82,8 +82,8 @@ _fnm_autoload_hook () {
   fi
 }
 
-add-zsh-hook chpwd _fnm_autoload_hook \
-  && _fnm_autoload_hook
+add-zsh-hook chpwd _fnm_autoload_hook &&
+  _fnm_autoload_hook
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
@@ -101,7 +101,7 @@ opoff() {
 
 getpwd() {
   opon
-  op get item "$1" |jq -r '.details.fields[] |select(.designation=="password").value'
+  op get item "$1" | jq -r '.details.fields[] |select(.designation=="password").value'
   # opoff
 }
 
@@ -127,7 +127,7 @@ trap opoff EXIT
 
 cloc-git() {
   git clone --depth 1 "$1" temp-linecount-repo &&
-  printf "('temp-linecount-repo' will be deleted automatically)\n\n\n" &&
-  scc temp-linecount-repo &&
-  rm -rf temp-linecount-repo
+    printf "('temp-linecount-repo' will be deleted automatically)\n\n\n" &&
+    scc temp-linecount-repo &&
+    rm -rf temp-linecount-repo
 }

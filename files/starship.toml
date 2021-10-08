@@ -2,12 +2,12 @@
 format = "[$symbol$profile(\\($region\\))]($style) "
 
 [character]
-success_symbol = "[➜](bold green)"
 error_symbol = "[x](bold red)"
+success_symbol = "[➜](bold green)"
 
 [directory]
-truncation_length = 2
 truncate_to_repo = false
+truncation_length = 2
 
 [cmd_duration]
 format = "[$duration]($style) "
@@ -18,16 +18,16 @@ format = "[$symbol$context]($style) "
 format = "[$symbol\\($branch\\)]($style) "
 
 [git_status]
-conflicted = "🏳"
 ahead = "🏎💨"
 behind = "😰"
-diverged = "😵"
-untracked = "🤷‍"
-stashed = "📦"
-modified = "📝"
-staged = '[++\($count\)](green)'
-renamed = "👅"
+conflicted = "🏳"
 deleted = "🗑"
+diverged = "�"
+modified = "📝"
+renamed = "👅"
+staged = '[++\($count\)](green)'
+stashed = "�"
+untracked = "🤷‍"
 
 [package]
 format = "[$symbol$version]($style) "
@@ -39,4 +39,4 @@ format = "[$symbol$version]($style) "
 format = "🕙[\\[ $time \\]]($style) "
 
 [terraform]
-format= "[$symbol$workspace]($style) "
+format = "[$symbol$workspace]($style) "

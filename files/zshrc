@@ -1,7 +1,7 @@
 autoload -U colors && colors
 for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
-    eval $COLOR='$fg_no_bold[${(L)COLOR}]'  #wrap colours between %{ %} to avoid weird gaps in autocomplete
-    eval BOLD_$COLOR='$fg_bold[${(L)COLOR}]'
+  eval $COLOR='$fg_no_bold[${(L)COLOR}]' #wrap colours between %{ %} to avoid weird gaps in autocomplete
+  eval BOLD_$COLOR='$fg_bold[${(L)COLOR}]'
 done
 eval RESET='%{$reset_color%}'
 
@@ -24,20 +24,21 @@ antigen bundle zsh-users/zsh-history-substring-search
 
 antigen cache-gen
 
-case `uname` in
-  Darwin)
-    # Commands for OS X go here
-    antigen bundle osx
+case $(uname) in
+Darwin)
+  # Commands for OS X go here
+  antigen bundle osx
   ;;
-  Linux)
-    # Commands for Linux go here
+Linux)
+  # Commands for Linux go here
   ;;
 esac
 
 # workaround for https://github.com/zsh-users/antigen/issues/675
 THEME=robbyrussell
 
-antigen list | grep $THEME; if [ $? -ne 0 ]; then antigen theme $THEME; fi
+antigen list | grep $THEME
+if [ $? -ne 0 ]; then antigen theme $THEME; fi
 # antigen theme robbyrussell
 
 antigen apply
