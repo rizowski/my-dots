@@ -15,7 +15,7 @@ antigen bundle z
 antigen bundle changyuheng/fz
 antigen bundle Aloxaf/fzf-tab
 antigen bundle zsh-users/zsh-syntax-highlighting
-# antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle colored-man-pages
 antigen bundle unixorn/autoupdate-antigen.zshplugin
 antigen bundle MichaelAquilina/zsh-you-should-use
@@ -52,3 +52,5 @@ source ~/.profile
 
 # added by Snowflake SnowSQL installer v1.2
 export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
