@@ -87,7 +87,7 @@ add-zsh-hook chpwd _fnm_autoload_hook &&
 aws_auto_profile_hook() {
   file=$(upfind .aws-profile)
 
-  [[ -z "$file" ]] && return
+  [[ -z "$file" ]] && unset AWS_PROFILE && return
 
   profile=$(cat "$file")
 
