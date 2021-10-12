@@ -1,4 +1,5 @@
 set encoding=utf-8
+set number
 
 if has('persistent_undo')      "check if your vim version supports it
   set undofile                 "turn on the feature

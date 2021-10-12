@@ -1,5 +1,4 @@
 # Set curl path
-
 export PATH="/usr/local/opt/curl/bin:$PATH"
 
 # https://github.com/keybase/keybase-issues/issues/1712#issuecomment-141226705
@@ -11,7 +10,7 @@ set completion-ignore-case on
 . $(brew --prefix)/etc/profile.d/z.sh
 
 set_ran_date() {
-  echo $(($(date +%s) / 60 / 60 / 24)) $1 >!
+  echo $(($(date +%s) / 60 / 60 / 24)) >$1
 }
 
 check_to_update() {
@@ -84,6 +83,21 @@ _fnm_autoload_hook() {
 
 add-zsh-hook chpwd _fnm_autoload_hook &&
   _fnm_autoload_hook
+
+aws_auto_profile_hook() {
+  file=$(upfind .aws-profile)
+
+  [[ -z "$file" ]] && return
+
+  profile=$(cat "$file")
+
+  [[ -z "$profile" ]] && echo ".aws-profile was empty. No profile found" && return
+
+  export AWS_PROFILE="$profile"
+}
+
+add-zsh-hook chpwd aws_auto_profile_hook &&
+  aws_auto_profile_hook
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 

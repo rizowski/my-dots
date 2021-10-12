@@ -98,6 +98,11 @@
     - [brew cleanup, Cleaning up brew mess]
     - command: pip3 install credstash
       description: installing credstash
+
+
+- shell:
+  - ["gh extensions install rizowski/gh-clean-branches"]
+
 # # https://github.com/sobolevn/dotbot-pip?ts=2
 # - pip:
 #     binary: /usr/local/bin/pip3
