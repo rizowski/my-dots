@@ -91,7 +91,7 @@ aws_auto_profile_hook() {
 
   profile=$(cat "$file")
 
-  [[ -z "$profile" ]] && echo ".aws-profile was empty. No profile found" && return
+  [[ -z "$profile" ]] && echo ".aws-profile was empty.\nNo profile found $file" && return
 
   export AWS_PROFILE="$profile"
 }
