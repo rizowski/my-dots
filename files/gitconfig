@@ -3,6 +3,7 @@ co = checkout
 st = status
 lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 la = !git lg --all
+update = "!f(){ git fetch origin \"$1\" && git pull --rebase --autostash origin \"$1\"; }; f"
 #[remote "origin"]
 #  fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
 [merge]
