@@ -40,6 +40,7 @@ brew "glances"
 brew "gnupg"
 brew "go"
 brew "helm"
+brew "libheif"
 brew "imagemagick"
 brew "jq"
 brew "kubernetes-cli"
@@ -79,9 +80,7 @@ brew "hashicorp/tap/boundary"
 brew "hashicorp/tap/vault"
 brew "teamookla/speedtest/speedtest"
 brew "tylerbrock/saw/saw"
-cask "1password"
 cask "1password-cli"
-cask "adoptopenjdk8"
 cask "alfred"
 cask "android-messages"
 cask "android-platform-tools"
@@ -133,6 +132,7 @@ cask "slack"
 cask "snowflake-snowsql"
 cask "soqlxplorer"
 cask "spotify"
+cask "steam"
 cask "synergy"
 cask "tableplus"
 cask "teamviewer"
@@ -141,9 +141,9 @@ cask "tradingview"
 cask "ultimaker-cura"
 cask "unetbootin"
 cask "visual-studio-code"
+mas "1Password 7", id: 1333542190
 mas "Affinity Designer", id: 824171161
 mas "Affinity Photo", id: 824183456
-mas "Airmail", id: 918858936
 mas "Amphetamine", id: 937984704
 mas "DaisyDisk", id: 411643860
 mas "Deliveries", id: 924726344
