@@ -1,6 +1,6 @@
 #!/bin/bash
 
-brew=/usr/local/bin/brew
+brew=/opt/homebrew/bin/brew
 
 echo "Starting to update brew"
 $brew update

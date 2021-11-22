@@ -7,6 +7,11 @@ eval RESET='%{$reset_color%}'
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(rbenv init - zsh)"
 
+HB_CNF_HANDLER="$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
+if [ -f "$HB_CNF_HANDLER" ]; then
+  source "$HB_CNF_HANDLER"
+fi
+
 # zmodload zsh/zprof
 source $HOME/.antigen/antigen.zsh
 antigen use oh-my-zsh
@@ -20,16 +25,16 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle colored-man-pages
 antigen bundle unixorn/autoupdate-antigen.zshplugin
-antigen bundle MichaelAquilina/zsh-you-should-use
 antigen bundle akoenig/npm-run.plugin.zsh
 antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle command-not-found
 
 antigen cache-gen
 
 case $(uname) in
 Darwin)
   # Commands for OS X go here
-  antigen bundle osx
+  antigen bundle macos
   ;;
 Linux)
   # Commands for Linux go here
@@ -56,6 +61,7 @@ source ~/.profile
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 # added by Snowflake SnowSQL installer v1.2
 export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
+export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
