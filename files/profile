@@ -52,7 +52,7 @@ swap_npm_user() {
 
 add-zsh-hook chpwd swap_npm_user && swap_npm_user
 
-check_to_update /usr/local/bin/brew-update brew 7
+check_to_update ~/bin/brew-update brew 7
 
 source ~/.work-profile
 
