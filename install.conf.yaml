@@ -99,7 +99,9 @@
 
 
 - shell:
-  - ["gh extensions install rizowski/gh-clean-branches"]
+  -
+    command: "gh extensions install rizowski/gh-clean-branches"
+    quiet: true
 
 # # https://github.com/sobolevn/dotbot-pip?ts=2
 # - pip:

@@ -46,5 +46,9 @@ minus-style = syntax "#3f0001"
 syntax-theme = Monokai Extended
 navigate = true
 
+[delta "plain"]
+features = dark
+navigate = true
+
 [interactive]
 diffFilter = delta --color-only

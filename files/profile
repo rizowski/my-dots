@@ -145,3 +145,15 @@ cloc-git() {
     scc temp-linecount-repo &&
     rm -rf temp-linecount-repo
 }
+
+# kill process on port lol
+kpop() {
+  sudo lsof -i -P | grep "$1 (LISTEN)"
+  echo "What is the pid you would like to kill?"
+  read "pid?PID: "
+
+  echo "Killing $pid"
+
+  sudo kill -9 $pid
+}  
+
