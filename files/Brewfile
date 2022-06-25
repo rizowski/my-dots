@@ -134,6 +134,7 @@ cask "postman"
 cask "private-internet-access"
 cask "react-native-debugger"
 cask "resilio-sync"
+cask "rocket"
 cask "runescape"
 cask "simplenote"
 cask "slack"
@@ -144,6 +145,8 @@ cask "steam"
 cask "synergy"
 cask "tableplus"
 cask "teamviewer"
+cask "there"
+cask "thunderbird"
 cask "tor-browser"
 cask "tradingview"
 cask "ultimaker-cura"
@@ -151,8 +154,10 @@ cask "unetbootin"
 cask "visual-studio-code"
 cask "zoom"
 mas "1Password 7", id: 1333542190
+mas "Actions", id: 1586435171
 mas "Affinity Designer", id: 824171161
 mas "Affinity Photo", id: 824183456
+mas "Airmail", id: 918858936
 mas "Amphetamine", id: 937984704
 mas "DaisyDisk", id: 411643860
 mas "Deliveries", id: 924726344
