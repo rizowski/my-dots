@@ -53,7 +53,7 @@ antigen apply
 
 eval "$(starship init zsh)"
 
-source /Users/rizowski/.config/op/plugins.sh
+source ~/.config/op/plugins.sh
 source ~/.aliases
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
