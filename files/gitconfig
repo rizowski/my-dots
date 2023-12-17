@@ -6,6 +6,7 @@ la = !git lg --all
 update = "!f(){ git fetch origin \"$1\" && git pull --rebase --autostash origin \"$1\"; }; f"
 bl = !git branch -l --color --sort -committerdate --format='%(committerdate:relative) - %(refname:short)' | grep -v 'HEAD' | head -n 10
 blr = !git branch -r --color --sort -committerdate --format='%(committerdate:relative) - %(refname:short)' | grep -v 'HEAD' | head -n 10
+oc = checkout
 
 #[remote "origin"]
 #  fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
@@ -20,6 +21,7 @@ keepBackup = false
 prompt = false
 [commit]
 gpgsign = true
+	rebase = true
 
 [user]
 name = Colten Rouska
@@ -61,3 +63,9 @@ format = ssh
 
 [gpg "ssh"]
 program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+[rebase]
+	autostash = true
+[push]
+	autoSetupRemote = true
+[color]
+	ui = auto

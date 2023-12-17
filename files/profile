@@ -7,6 +7,8 @@ export GPG_TTY=$(tty)
 # who cares about casing? I don't
 set completion-ignore-case on
 
+# terragrunt --install-autocomplete
+
 . $(brew --prefix)/etc/profile.d/z.sh
 
 set_ran_date() {
@@ -61,28 +63,14 @@ if [ -d "$HOME/bin" ]; then
   PATH="$HOME/bin:$PATH"
 fi
 
-export PATH=$HOME/.fnm/current/bin:$PATH
-export FNM_MULTISHELL_PATH=$HOME/.fnm/current
-export FNM_DIR=$HOME/.fnm
-export FNM_NODE_DIST_MIRROR=https://nodejs.org/dist
-export FNM_LOGLEVEL=all
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 
+# FNM CD Hook
+eval "$(fnm env --use-on-cd)"
+export FNM_VERSION_FILE_STRATEGY=recursive
+
 autoload -U add-zsh-hook
-
-_fnm_autoload_hook() {
-  if [[ -f .node-version && -r .node-version ]]; then
-    echo "fnm: Found .node-version"
-    fnm use
-  elif [[ -f .nvmrc && -r .nvmrc ]]; then
-    echo "fnm: Found .nvmrc"
-    fnm use
-  fi
-}
-
-add-zsh-hook chpwd _fnm_autoload_hook &&
-  _fnm_autoload_hook
 
 aws_auto_profile_hook() {
   file=$(upfind .aws-profile)
@@ -100,6 +88,12 @@ add-zsh-hook chpwd aws_auto_profile_hook &&
   aws_auto_profile_hook
 
 fpath=(/usr/local/share/zsh-completions $fpath)
+
+# function set_win_title() {
+#   echo -ne "\033]0; $(basename "$PWD") \007"
+# }
+
+# precmd_functions+=(set_win_title)
 
 # 1Password
 opon() {
@@ -155,5 +149,5 @@ kpop() {
   echo "Killing $pid"
 
   sudo kill -9 $pid
-}  
-
+}
+source "/Users/rizowski/.rover/env"

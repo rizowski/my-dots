@@ -18,7 +18,7 @@ antigen use oh-my-zsh
 
 antigen bundle docker-compose
 antigen bundle git
-antigen bundle z
+antigen bundle agkozak/zsh-z
 antigen bundle changyuheng/fz
 antigen bundle Aloxaf/fzf-tab
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -71,5 +71,9 @@ export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
 export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+export PATH="/opt/homebrew/opt/ruby@2.7/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terragrunt terragrunt
