@@ -21,7 +21,7 @@ keepBackup = false
 prompt = false
 [commit]
 gpgsign = true
-	rebase = true
+rebase = true
 
 [user]
 name = Colten Rouska
@@ -64,8 +64,8 @@ format = ssh
 [gpg "ssh"]
 program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [rebase]
-	autostash = true
+autostash = true
 [push]
-	autoSetupRemote = true
+autoSetupRemote = true
 [color]
-	ui = auto
+ui = auto

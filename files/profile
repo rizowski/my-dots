@@ -9,8 +9,6 @@ set completion-ignore-case on
 
 # terragrunt --install-autocomplete
 
-. $(brew --prefix)/etc/profile.d/z.sh
-
 set_ran_date() {
   echo $(($(date +%s) / 60 / 60 / 24)) >$1
 }
@@ -150,4 +148,3 @@ kpop() {
 
   sudo kill -9 $pid
 }
-source "/Users/rizowski/.rover/env"
