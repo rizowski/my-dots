@@ -3,7 +3,7 @@
       create: true
       relink: true
 
-- clean: ["~"]
+- clean: ['~']
 
 - create:
     ~/git:
@@ -19,8 +19,7 @@
 
 - shell:
     - git submodule update --init --recursive
-    -
-      command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    - command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       description: installing brew
       stdin: true
       stdout: true
@@ -40,7 +39,7 @@
     ~/.aliases:
       path: files/aliases
     ~/.Brewfile:
-      if: "[ `uname` = Darwin ]"
+      if: '[ `uname` = Darwin ]'
       path: files/Brewfile
     ~/.profile:
       path: files/profile
@@ -94,15 +93,10 @@
       quiet: true
       description: Installing globals with yarn
     - [brew cleanup, Cleaning up brew mess]
-    - command: pip3 install credstash
-      description: installing credstash
-
 
 - shell:
-  -
-    command: "gh extensions install rizowski/gh-clean-branches"
-    quiet: true
-
+    - command: 'gh extensions install rizowski/gh-clean-branches'
+      quiet: true
 # # https://github.com/sobolevn/dotbot-pip?ts=2
 # - pip:
 #     binary: /usr/local/bin/pip3

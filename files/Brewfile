@@ -151,13 +151,11 @@ cask "iterm2"
 cask "keka"
 cask "linear-linear"
 cask "neat"
-cask "ngrok"
 cask "notion"
 cask "obsidian"
 cask "orangedrangon-android-messages"
 cask "orbstack"
 cask "p4v"
-cask "parsec"
 cask "pingnoo"
 cask "postman"
 cask "private-internet-access"
@@ -182,9 +180,12 @@ mas "Affinity Designer", id: 824171161
 mas "Affinity Photo", id: 824183456
 mas "Amphetamine", id: 937984704
 mas "DaisyDisk", id: 411643860
+mas "Dato", id: 1470584107
+mas "GIF Brewery 3", id: 1081413713
+mas "HP Smart", id: 1474276998
 mas "LanScan", id: 472226235
 mas "Magnet", id: 441258766
-mas "Medis", id: 1063631769
+mas "Medis", id: 1579200037
 mas "Paprika Recipe Manager 3", id: 1303222628
 mas "UTC Time", id: 1538245904
 mas "WhatsApp", id: 1147396723
