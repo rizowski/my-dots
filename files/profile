@@ -148,3 +148,4 @@ kpop() {
 
   sudo kill -9 $pid
 }
+source "/Users/rizowski/.rover/env"

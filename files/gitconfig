@@ -33,6 +33,7 @@ path = ~/.gitconfig-work
 
 [core]
 autocrlf = input
+pager = delta
 [pull]
 rebase = true
 [init]
@@ -56,7 +57,7 @@ features = dark
 navigate = true
 
 [interactive]
-diffFilter = delta --color-only
+diffFilter = delta --color-only --features=interactive
 
 [gpg]
 format = ssh
@@ -69,3 +70,5 @@ autostash = true
 autoSetupRemote = true
 [color]
 ui = auto
+[rerere]
+	enabled = true
