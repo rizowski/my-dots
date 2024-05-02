@@ -1,0 +1,24 @@
+#!/bin/bash
+
+read -p "Enter the name of the EFS file system: " NAME
+
+FS_ID=$(aws efs describe-file-systems --output json --no-paginate | jq --arg name "$NAME" '.FileSystems[] | select(.Name == $name) | .FileSystemId' --raw-output)
+
+if [ -z "$FS_ID" ]; then
+  echo "No file system found with the name $NAME"
+  exit 1
+fi
+
+IP=$(aws efs describe-mount-targets --file-system-id $FS_ID --output json | jq --raw-output '.MountTargets[0].IpAddress')
+
+if [ -z "$IP" ]; then
+  echo "No mount target found for file system $FS_ID"
+  exit 1
+fi
+
+echo "Mounting $FS_ID at $IP to /mnt/efs"
+
+sudo mkdir -p ./efs
+sudo mount -t nfs -o vers=4 -o tcp -w $IP:/ ./efs
+cd ./efs
+open .
