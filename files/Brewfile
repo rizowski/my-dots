@@ -5,9 +5,11 @@ tap "busser/tap"
 tap "dopplerhq/cli"
 tap "hashicorp/tap"
 tap "homebrew/bundle"
+tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/command-not-found"
+tap "homebrew/core"
 tap "homebrew/services"
 tap "hudochenkov/sshpass"
 tap "padok-team/tap"
@@ -94,7 +96,6 @@ brew "terraformer"
 brew "terragrunt"
 brew "tig"
 brew "tree"
-brew "trivy"
 brew "vim"
 brew "wakeonlan"
 brew "watch"
@@ -109,7 +110,7 @@ brew "zoxide"
 brew "zsh"
 brew "zsh-completions"
 brew "busser/tap/tfautomv"
-brew "dopplerhq/cli/doppler", link: true
+brew "dopplerhq/cli/doppler"
 brew "hashicorp/tap/boundary"
 brew "hashicorp/tap/terraform"
 brew "hudochenkov/sshpass/sshpass"
@@ -169,6 +170,7 @@ cask "react-native-debugger"
 cask "redisinsight"
 cask "resilio-sync"
 cask "rustdesk"
+cask "slack"
 cask "snowflake-snowsql"
 cask "soqlxplorer"
 cask "spotify"
@@ -185,6 +187,7 @@ cask "zulu11"
 mas "Affinity Designer", id: 824171161
 mas "Affinity Photo", id: 824183456
 mas "Amphetamine", id: 937984704
+mas "Copilot", id: 1447330651
 mas "DaisyDisk", id: 411643860
 mas "Dato", id: 1470584107
 mas "GIF Brewery 3", id: 1081413713
@@ -192,6 +195,7 @@ mas "HP Smart", id: 1474276998
 mas "LanScan", id: 472226235
 mas "Magnet", id: 441258766
 mas "Medis", id: 1579200037
+mas "MQTT Explorer", id: 1455214828
 mas "Paprika Recipe Manager 3", id: 1303222628
 mas "UTC Time", id: 1538245904
 mas "WhatsApp", id: 1147396723
