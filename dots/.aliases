@@ -1,0 +1,7 @@
+alias p4merge='/Applications/p4merge.app/Contents/MacOS/p4merge'
+alias compose='docker-compose'
+alias nvm='fnm'
+alias python=/usr/local/bin/python3
+alias cat=bat
+alias ls=eza
+#alias ls=k

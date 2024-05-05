@@ -2,16 +2,10 @@
 
 set -e
 
-CONFIG="install.conf.yaml"
-DOTBOT_DIR="dotbot"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install git stow gpg antigen
+brew link git gpg
+[ -d "$HOME/.oh-my-zsh" ] || git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
-DOTBOT_BIN="bin/dotbot"
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-git submodule update --recursive
-
-cd "${BASEDIR}"
-git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
-git submodule update --init --recursive "${DOTBOT_DIR}"
-
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" --verbose --plugin-dir dotbot-brew -c "${CONFIG}" "${@}"
+cd dots
+stow -t ~ .

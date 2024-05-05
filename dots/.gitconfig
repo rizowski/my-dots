@@ -1,0 +1,74 @@
+[alias]
+co = checkout
+st = status
+lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+la = !git lg --all
+update = "!f(){ git fetch origin \"$1\" && git pull --rebase --autostash origin \"$1\"; }; f"
+bl = !git branch -l --color --sort -committerdate --format='%(committerdate:relative) - %(refname:short)' | grep -v 'HEAD' | head -n 10
+blr = !git branch -r --color --sort -committerdate --format='%(committerdate:relative) - %(refname:short)' | grep -v 'HEAD' | head -n 10
+oc = checkout
+
+#[remote "origin"]
+#  fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
+[merge]
+tool = p4merge
+[mergetool "p4merge"]
+cmd = /Applications/p4merge.app/Contents/MacOS/p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+[mergetool]
+keepTemporaries = false
+trustExitCode = false
+keepBackup = false
+prompt = false
+[commit]
+gpgsign = true
+rebase = true
+
+[user]
+name = Colten Rouska
+email = crouska@gmail.com
+signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOb2vBBvcdJjILOkccQioQSL1GxheQQieyizRRL9H9ei
+
+[includeIf "gitdir:~/git/work/**"]
+path = ~/.gitconfig-work
+
+[core]
+autocrlf = input
+pager = delta
+[pull]
+rebase = true
+[init]
+defaultBranch = main
+
+[pager]
+diff = delta
+log = delta
+reflog = delta
+show = delta
+
+[delta]
+features = side-by-side line-numbers decorations dark
+plus-style = syntax "#003800"
+minus-style = syntax "#3f0001"
+syntax-theme = Monokai Extended
+navigate = true
+
+[delta "plain"]
+features = dark
+navigate = true
+
+[interactive]
+diffFilter = delta --color-only --features=interactive
+
+[gpg]
+format = ssh
+
+[gpg "ssh"]
+program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+[rebase]
+autostash = true
+[push]
+autoSetupRemote = true
+[color]
+ui = auto
+[rerere]
+enabled = true
