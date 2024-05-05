@@ -5,7 +5,7 @@ set -e
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install git stow gpg antigen
 brew link git gpg
-[ -d "$HOME/.oh-my-zsh" ] || git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+# [ -d "$HOME/.oh-my-zsh" ] || git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
 cd dots
 stow -t ~ .

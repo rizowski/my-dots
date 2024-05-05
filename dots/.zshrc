@@ -75,4 +75,4 @@ export PATH="/opt/homebrew/opt/ruby@2.7/bin:$PATH"
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terragrunt terragrunt
-eval "$(gh copilot alias -- zsh)"
+# eval "$(gh copilot alias -- zsh)"
