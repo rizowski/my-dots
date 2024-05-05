@@ -29,7 +29,6 @@ antigen bundle akoenig/npm-run.plugin.zsh
 antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle command-not-found
 antigen bundle supercrabtree/k
-
 antigen cache-gen
 
 case $(uname) in
@@ -44,7 +43,6 @@ esac
 
 # workaround for https://github.com/zsh-users/antigen/issues/675
 THEME=robbyrussell
-
 antigen list | grep $THEME
 if [ $? -ne 0 ]; then antigen theme $THEME; fi
 # antigen theme robbyrussell
