@@ -1,14 +1,13 @@
 #!/bin/bash
 upfind-internal() {
-	while [[ $PWD != / ]]; do
-	  res=$(find "$PWD" -maxdepth 1 -type f -iname "$@")
-	  if [[ ! -z "$res" ]]; then
-            echo "$res"
-	    return 0
-	  fi
-	  cd ..
-	done
+  while [[ $PWD != / ]]; do
+    res=$(find "$PWD" -maxdepth 1 -type f -iname "$@")
+    if [[ ! -z "$res" ]]; then
+      echo "$res"
+      return 0
+    fi
+    cd ..
+  done
 }
-
 
 upfind-internal "$1"
