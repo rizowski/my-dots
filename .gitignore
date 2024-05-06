@@ -29,4 +29,10 @@ Temporary Items
 .apdisk
 
 dots/.config/iterm2
+dots/.config/btop
+dots/.config/configstore
+dots/.config/op/plugins
 dots/.config/op/config
+dots/.config/yarn
+
+*.log

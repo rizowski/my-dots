@@ -1,7 +1,0 @@
-#!/bin/bash
-
-gpg --list-secret-keys --keyid-format LONG
-sudo chown -R $(whoami) ~/.gnupg
-chmod 600 ~/.gnupg/*
-chmod 700 ~/.gnupg
-keybase pgp export
