@@ -1,6 +1,3 @@
-# Set curl path
-export PATH="/usr/local/opt/curl/bin:$PATH"
-
 # https://github.com/keybase/keybase-issues/issues/1712#issuecomment-141226705
 export GPG_TTY=$(tty)
 
@@ -86,50 +83,6 @@ add-zsh-hook chpwd aws_auto_profile_hook &&
   aws_auto_profile_hook
 
 fpath=(/usr/local/share/zsh-completions $fpath)
-
-# function set_win_title() {
-#   echo -ne "\033]0; $(basename "$PWD") \007"
-# }
-
-# precmd_functions+=(set_win_title)
-
-# 1Password
-opon() {
-  if [[ -z $OP_SESSION_crouska ]]; then
-    eval $(op signin crouska crouska@gmail.com)
-  fi
-}
-
-opoff() {
-  op signout
-  unset OP_SESSION_crouska
-}
-
-getpwd() {
-  opon
-  op get item "$1" | jq -r '.details.fields[] |select(.designation=="password").value'
-  # opoff
-}
-
-getmfa() {
-  opon
-  op get totp "$1"
-  # opoff
-}
-
-sshkey() {
-  opon
-  echo "$(op get item "ssh-key-$1" | jq -r '.details.notesPlain')" | ssh-add -
-  # opoff
-}
-
-sshpub() {
-  opon
-  echo "$(op get item "ssh-pub-$1" | jq -r '.details.notesPlain')" | ssh-add -
-  # opoff
-}
-
-trap opoff EXIT
 
 cloc-git() {
   git clone --depth 1 "$1" temp-linecount-repo &&
