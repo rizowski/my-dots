@@ -1,8 +1,14 @@
 #!/bin/bash
 
-read -p "Enter the name of the EFS file system: " NAME
+drives=$(aws efs describe-file-systems --output json --no-paginate | jq '[.FileSystems[] | {FileSystemId, Name}]')
+names=$(echo "$drives" | jq '.[].Name' --raw-output)
 
-FS_ID=$(aws efs describe-file-systems --output json --no-paginate | jq --arg name "$NAME" '.FileSystems[] | select(.Name == $name) | .FileSystemId' --raw-output)
+echo "Select the drive:"
+select drive in ${names[@]}; do
+  break
+done
+
+FS_ID=$(echo "$drives" | jq -cr ".[] | select(.Name == \"$drive\") | .FileSystemId")
 
 if [ -z "$FS_ID" ]; then
   echo "No file system found with the name $NAME"

@@ -43,8 +43,7 @@ check_to_update() {
 check_to_update ~/bin/brew-update brew 7
 
 # FNM CD Hook
-eval "$(fnm env --use-on-cd)"
-export FNM_VERSION_FILE_STRATEGY=recursive
+eval "$(fnm env --use-on-cd --corepack-enabled --resolve-engines --version-file-strategy recursive)"
 
 autoload -U add-zsh-hook
 
