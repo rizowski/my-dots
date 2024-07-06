@@ -1,6 +1,6 @@
 case $(uname) in
 Darwin)
-  export ONEPASS_SSH_AGENT_PATH=~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock
+  export ONEPASS_SSH_AGENT_PATH="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   eval "$(/opt/homebrew/bin/brew shellenv)"
   export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
   # Added by OrbStack: command-line tools and integration
@@ -10,7 +10,7 @@ Darwin)
   export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
   ;;
 Linux)
-  export ONEPASS_SSH_AGENT_PATH=~/.1password/agent.sock
+  export ONEPASS_SSH_AGENT_PATH="$HOME/.1password/agent.sock"
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   export PATH="$HOMEBREW_PREFIX/.linuxbrew/bin:$PATH"
   export PATH="$HOMEBREW_PREFIX/.linuxbrew/sbin:$PATH"
