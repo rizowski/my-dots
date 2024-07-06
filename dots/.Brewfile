@@ -5,9 +5,7 @@ tap "busser/tap"
 tap "dopplerhq/cli"
 tap "hashicorp/tap"
 tap "homebrew/bundle"
-tap "homebrew/cask"
 tap "homebrew/command-not-found"
-tap "homebrew/core"
 tap "homebrew/services"
 tap "hudochenkov/sshpass"
 tap "padok-team/tap"
@@ -21,8 +19,6 @@ brew "ansible"
 brew "ansible-lint"
 brew "antigen"
 brew "webp"
-brew "jpeg-xl"
-brew "aom"
 brew "awk"
 brew "aws-sam-cli"
 brew "awscli"
@@ -33,24 +29,27 @@ brew "ruby", link: true
 brew "cocoapods"
 brew "coreutils"
 brew "curl", link: true
-brew "libusb"
 brew "dfu-util"
 brew "doctl"
 brew "dotenv-linter"
+brew "folly"
+brew "fizz"
+brew "wangle"
+brew "fbthrift"
+brew "fb303"
 brew "edencommon"
 brew "eza"
 brew "fastlane"
 brew "fnm"
 brew "fzf"
 brew "gh"
-brew "git"
+brew "git", link: true
 brew "git-delta"
 brew "glances"
 brew "gnupg"
 brew "go"
 brew "pkg-config"
 brew "gobject-introspection"
-brew "grpc"
 brew "harfbuzz"
 brew "helm"
 brew "libheif"
@@ -66,7 +65,6 @@ brew "ncdu"
 brew "nmap"
 brew "nss"
 brew "openjdk@11"
-brew "pango"
 brew "pinentry-mac"
 brew "psqlodbc"
 brew "python@3.8"
@@ -165,8 +163,8 @@ mas "LanScan", id: 472226235
 mas "Magnet", id: 441258766
 mas "Medis", id: 1579200037
 mas "MQTT Explorer", id: 1455214828
+mas "Numbers", id: 409203825
 mas "Paprika Recipe Manager 3", id: 1303222628
-mas "PDF Expert", id: 1055273043
 mas "UTC Time", id: 1538245904
 mas "WhatsApp", id: 1147396723
 mas "WiFi Explorer", id: 494803304
