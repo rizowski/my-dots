@@ -5,6 +5,8 @@ Darwin)
   source $HOME/.antigen/antigen.zsh
   export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
   HB_CNF_HANDLER="$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
+  # Added by OrbStack: command-line tools and integration
+  source ~/.orbstack/shell/init.zsh 2>/dev/null || :
   ;;
 Linux)
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
