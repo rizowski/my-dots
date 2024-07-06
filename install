@@ -1,9 +1,23 @@
 #!/usr/bin/env bash
 
 set -e
+echo "$OSTYPE $(uname)"
+
+if [ $(uname) == "Darwin" ]; then
+  xcode-select --install
+fi
+
+if [ $(uname) == "Linux" ]; then
+  sudo apt update
+  sudo apt upgrade -y
+  export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+fi
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install git stow gpg antigen
+
+brew reinstall git stow gpg antigen
+
+brew unlink git gpg
 brew link git gpg
 
 cd dots

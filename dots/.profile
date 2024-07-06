@@ -38,7 +38,7 @@ check_to_update() {
 }
 
 swap_npm_user() {
-  local thedir="$(PWD)"
+  local thedir="$(pwd)"
 
   if [[ $thedir == *"vs"* ]]; then
     ln -sf ~/git/vs/.npmrc ~/.npmrc
@@ -47,7 +47,7 @@ swap_npm_user() {
   fi
 }
 
-add-zsh-hook chpwd swap_npm_user && swap_npm_user
+# add-zsh-hook chpwd swap_npm_user && swap_npm_user
 
 check_to_update ~/bin/brew-update brew 7
 

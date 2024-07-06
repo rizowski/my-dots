@@ -20,13 +20,11 @@ trustExitCode = false
 keepBackup = false
 prompt = false
 [commit]
-gpgsign = true
 rebase = true
 
 [user]
 name = Colten Rouska
 email = crouska@gmail.com
-signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOb2vBBvcdJjILOkccQioQSL1GxheQQieyizRRL9H9ei
 
 [includeIf "gitdir:~/git/work/**"]
 path = ~/.gitconfig-work
@@ -62,8 +60,6 @@ diffFilter = delta --color-only --features=interactive
 [gpg]
 format = ssh
 
-[gpg "ssh"]
-program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [rebase]
 autostash = true
 [push]
@@ -72,3 +68,7 @@ autoSetupRemote = true
 ui = auto
 [rerere]
 enabled = true
+[includeIf "gitdir:/Users"]
+path=~/.gitconfig-mac
+[includeIf "gitdir:/home"]
+path=~/.gitconfig-linux
