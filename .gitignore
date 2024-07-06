@@ -34,5 +34,7 @@ dots/.config/configstore
 dots/.config/op/plugins
 dots/.config/op/config
 dots/.config/yarn
+dots/.config/asciinema
+dots/.config/testcontainers
 
 *.log
