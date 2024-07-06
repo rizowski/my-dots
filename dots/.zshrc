@@ -8,7 +8,7 @@ Darwin)
   test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
   ;;
 Linux)
-  source /home/linuxbrew/.linuxbrew/share/antigen/antigen.zsh
+  source $HOMEBREW_PREFIX/share/antigen/antigen.zsh
   HB_CNF_HANDLER="$HOMEBREW_PREFIX/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
   ;;
 esac
