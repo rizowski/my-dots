@@ -1,5 +1,5 @@
 set nocompatible
-set encodiOng=utf-8
+set encoding=utf-8
 set number
 syntax on
 filetype on
