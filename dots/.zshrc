@@ -64,6 +64,7 @@ if [ $? -ne 0 ]; then antigen theme $THEME; fi
 
 antigen apply
 
+source <(fzf --zsh)
 eval "$(starship init zsh)"
 
 source ~/.config/op/plugins.sh
