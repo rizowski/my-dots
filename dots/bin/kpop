@@ -1,0 +1,14 @@
+#!/bin/bash
+# kill process on port lol
+
+sudo lsof -i -P | grep "$1 (LISTEN)"
+
+echo "What is the pid you would like to kill?"
+
+select pid in ${pids[@]}; do
+  break
+done
+
+echo "Killing $pid"
+
+sudo kill -9 $pid
