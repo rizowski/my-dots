@@ -12,3 +12,4 @@
   - [antigen](https://github.com/zsh-users/antigen)
 - [homebrew](https://brew.sh)
   - [brew-bundle](https://github.com/Homebrew/homebrew-bundle)
+- [GNU Stow](https://www.gnu.org/software/stow/)
