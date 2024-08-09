@@ -13,7 +13,7 @@ set_ran_date() {
   echo $(($(date +%s) / 60 / 60 / 24)) >$1
 }
 
-should_update ~/bin/brew-update brew 7
+should-update ~/bin/brew-update brew 7
 
 # FNM CD Hook
 eval "$(fnm env --use-on-cd --corepack-enabled --resolve-engines --version-file-strategy recursive)"
