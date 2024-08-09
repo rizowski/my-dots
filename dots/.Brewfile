@@ -66,6 +66,7 @@ brew "ncdu"
 brew "nmap"
 brew "nss"
 brew "openjdk@11"
+brew "parquet-cli"
 brew "pinentry-mac"
 brew "psqlodbc"
 brew "python@3.8"
@@ -119,6 +120,7 @@ cask "figma"
 cask "font-fira-code"
 cask "font-fira-code-nerd-font"
 cask "font-lato"
+cask "font-monaspace"
 cask "font-ostrich-sans"
 cask "font-raleway"
 cask "google-chrome"
@@ -170,3 +172,4 @@ mas "WhatsApp", id: 1147396723
 mas "WiFi Explorer", id: 494803304
 mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835
+mas "WhatsApp", id: 310633997

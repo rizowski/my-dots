@@ -3,15 +3,16 @@
 set -e
 echo "$OSTYPE $(uname)"
 
-if [ $(uname) == "Darwin" ]; then
+case $(uname) in
+Darwin)
   xcode-select --install | 2>/dev/null
-fi
-
-if [ $(uname) == "Linux" ]; then
+  ;;
+Linux)
   sudo apt update
   sudo apt upgrade -y
   export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
-fi
+  ;;
+esac
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
