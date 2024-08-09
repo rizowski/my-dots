@@ -24,6 +24,13 @@ brew link git gpg
 cd dots
 stow -t ~ .
 
+# ignore any changes to these files
+# they do need to be added to the gitignore after they are first tracked and comitted
+git update-index --assume-unchanged ./dots/.aws
+
+# To track them again:
+# git update-index --no-assume-unchanged ./dots/.aws
+
 chmod 700 ~/.config/op
 
 brew bundle install --global
