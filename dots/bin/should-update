@@ -1,8 +1,12 @@
-local script=$1
-local app=$2
-local updateDays=${3:-7}
-local settingsDir=~/.dot-settings
-local settingsPath=$settingsDir/$app
+set_ran_date() {
+  echo $(($(date +%s) / 60 / 60 / 24)) >$1
+}
+
+script=$1
+app=$2
+updateDays=${3:-7}
+settingsDir=~/.config/dot-settings
+settingsPath=$settingsDir/$app
 
 declare -i updateDays
 
@@ -16,7 +20,7 @@ declare -i days
 declare -i been
 
 if (($been >= $updateDays)); then
-  if read -q "?${YELLOW}Do you want to update ${2}? ${CYAN}[y/n]${WHITE} "; then
+  if read -p "Do you want to run $app? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]; then
     sh -c $script
   fi
   set_ran_date "$settingsPath"

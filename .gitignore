@@ -36,6 +36,7 @@ dots/.config/op/config
 dots/.config/yarn
 dots/.config/asciinema
 dots/.config/testcontainers
+dots/.config/dot-settings
 dots/.gnupg/*.kbx
 dots/.gnupg/*.gpg
 

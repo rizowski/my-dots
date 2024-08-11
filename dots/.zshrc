@@ -18,11 +18,11 @@ if [ -f "$HB_CNF_HANDLER" ]; then
 fi
 
 autoload -U colors && colors
-for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
-  eval $COLOR='$fg_no_bold[${(L)COLOR}]' #wrap colours between %{ %} to avoid weird gaps in autocomplete
-  eval BOLD_$COLOR='$fg_bold[${(L)COLOR}]'
-done
-eval RESET='%{$reset_color%}'
+# for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
+#   eval $COLOR='$fg_no_bold[${(L)COLOR}]' #wrap colours between %{ %} to avoid weird gaps in autocomplete
+#   eval BOLD_$COLOR='$fg_bold[${(L)COLOR}]'
+# done
+# eval RESET='%{$reset_color%}'
 
 eval "$(zoxide init zsh)"
 
@@ -55,6 +55,10 @@ Linux)
   # Commands for Linux go here
   ;;
 esac
+
+setopt INC_APPEND_HISTORY
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_DUPS
 
 # workaround for https://github.com/zsh-users/antigen/issues/675
 THEME=robbyrussell
