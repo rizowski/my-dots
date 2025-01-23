@@ -1,14 +1,30 @@
 #!/bin/bash
-# kill process on port lol
 
-sudo lsof -i -P | grep "$1 (LISTEN)"
+if [ -z "$1" ]; then
+  echo "Usage: $0 <port/service>"
+  exit 1
+fi
 
-echo "What is the pid you would like to kill?"
+matches=$(sudo lsof -i -P | grep "$1 (LISTEN)")
 
-select pid in ${pids[@]}; do
-  break
+if [ -z "$matches" ]; then
+  echo "No processes found listening for '$1'."
+  exit 0
+fi
+
+echo "Processes found:"
+echo "$matches"
+
+pids=($(echo "$matches" | awk '{print $2}'))
+echo "Select the PID to kill:"
+
+select pid in "${pids[@]}"; do
+  if [[ -n "$pid" ]]; then
+    echo "Killing PID $pid..."
+    sudo kill -9 "$pid"
+    echo "PID $pid has been terminated."
+    break
+  else
+    echo "Invalid selection. Try again."
+  fi
 done
-
-echo "Killing $pid"
-
-sudo kill -9 $pid

@@ -68,3 +68,5 @@ autoSetupRemote = true
 ui = auto
 [rerere]
 enabled = true
+[pack]
+	usePathWalk = true
