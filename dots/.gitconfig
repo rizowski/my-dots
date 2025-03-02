@@ -35,6 +35,8 @@ path = ~/.gitconfig-work
 [core]
 autocrlf = input
 pager = delta
+fsmonitor = true
+untrackedCache = true
 [pull]
 rebase = true
 [init]
@@ -46,6 +48,11 @@ log = delta
 reflog = delta
 show = delta
 
+[diff]
+algorithm = histogram
+colorMoved = plain
+renames = true
+mnemonicPrefix = true
 [delta]
 features = side-by-side line-numbers decorations dark
 plus-style = syntax "#003800"
@@ -63,10 +70,21 @@ diffFilter = delta --color-only --features=interactive
 [rebase]
 autostash = true
 [push]
+simple = true
 autoSetupRemote = true
 [color]
 ui = auto
 [rerere]
 enabled = true
 [pack]
-	usePathWalk = true
+usePathWalk = true
+[fetch]
+prune = true
+pruneTags = true
+all = true
+
+[help]
+autocorrect = true
+[rerere]
+enabled = true
+autoupdate = true
