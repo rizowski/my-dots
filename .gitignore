@@ -39,5 +39,12 @@ dots/.config/testcontainers
 dots/.config/dot-settings
 dots/.gnupg/*.kbx
 dots/.gnupg/*.gpg
+dots/.config/github-copilot
+
+dots/.config/zed
+!dots/.config/zed/settings.json
+
+dots/.ssh
+!dots/.ssh/agent
 
 *.log
