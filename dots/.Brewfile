@@ -1,12 +1,11 @@
 tap "aquasecurity/trivy"
+tap "atomicjar/tap"
 tap "aws/tap"
 tap "buo/cask-upgrade"
 tap "busser/tap"
 tap "dopplerhq/cli"
 tap "hashicorp/tap"
-tap "homebrew/bundle"
 tap "homebrew/command-not-found"
-tap "homebrew/services"
 tap "hudochenkov/sshpass"
 tap "padok-team/tap"
 tap "romankurnovskii/cask"
@@ -24,7 +23,8 @@ brew "awk"
 brew "aws-sam-cli"
 brew "awscli"
 brew "bat"
-brew "caddy", restart_service: true
+brew "caddy", restart_service: :changed
+brew "glib"
 brew "cmake"
 brew "ruby", link: true
 brew "cocoapods"
@@ -44,15 +44,16 @@ brew "fastlane"
 brew "fnm"
 brew "fzf"
 brew "gh"
-brew "git", link: true
+brew "harfbuzz"
+brew "git"
 brew "git-delta"
 brew "glances"
 brew "gnupg"
 brew "go"
-brew "pkg-config"
+brew "pkgconf"
 brew "gobject-introspection"
-brew "harfbuzz"
 brew "helm"
+brew "icu4c@76"
 brew "libheif"
 brew "imagemagick"
 brew "iproute2mac"
@@ -62,6 +63,7 @@ brew "kubernetes-cli"
 brew "lsd"
 brew "mas"
 brew "mkcert"
+brew "mvfst"
 brew "ncdu"
 brew "nmap"
 brew "nss"
@@ -123,6 +125,7 @@ cask "font-lato"
 cask "font-monaspace"
 cask "font-ostrich-sans"
 cask "font-raleway"
+cask "ghostty"
 cask "google-chrome"
 cask "hiddenbar"
 cask "insomnia"
@@ -132,6 +135,7 @@ cask "linear-linear"
 cask "neat"
 cask "notion"
 cask "obsidian"
+cask "ollamac"
 cask "orangedrangon-android-messages"
 cask "orbstack"
 cask "p4v"
@@ -150,6 +154,8 @@ cask "ultimaker-cura"
 cask "unetbootin"
 cask "visual-studio-code"
 cask "warp"
+cask "zed"
+cask "zen-browser"
 cask "zoom"
 mas "1Password for Safari", id: 1569813296
 mas "Affinity Designer", id: 824171161
@@ -168,8 +174,8 @@ mas "MQTT Explorer", id: 1455214828
 mas "Numbers", id: 409203825
 mas "Paprika Recipe Manager 3", id: 1303222628
 mas "UTC Time", id: 1538245904
+mas "WhatsApp", id: 310633997
 mas "WhatsApp", id: 1147396723
 mas "WiFi Explorer", id: 494803304
 mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835
-mas "‎WhatsApp", id: 310633997

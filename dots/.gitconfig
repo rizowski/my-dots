@@ -4,7 +4,7 @@ st = status
 lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 la = !git lg --all
 update = "!f(){ git fetch origin \"$1\" && git pull --rebase --autostash origin \"$1\"; }; f"
-bl = !git branch -l --color --sort -committerdate --format='%(committerdate:relative) - %(refname:short)' | grep -v 'HEAD' | head -n 10
+bl = !git branch -l --color --sort -committerdate --format='%(committerdate:relative) - %(refname:short)' | grep -v 'HEAD' # | head -n 10
 blr = !git branch -r --color --sort -committerdate --format='%(committerdate:relative) - %(refname:short)' | grep -v 'HEAD' | head -n 10
 oc = checkout
 
@@ -84,7 +84,7 @@ pruneTags = true
 all = true
 
 [help]
-autocorrect = true
+autocorrect = 1
 [rerere]
 enabled = true
 autoupdate = true
