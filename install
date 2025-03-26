@@ -15,8 +15,9 @@ Linux)
 esac
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
-brew reinstall git stow gpg antigen
+brew reinstall git stow gpg antigen fnm
 
 brew unlink git gpg
 brew link git gpg
@@ -28,6 +29,7 @@ cd ../
 # ignore any changes to these files
 # they do need to be added to the gitignore after they are first tracked and comitted
 git update-index --assume-unchanged ./dots/.aws/**
+git update-index --assume-unchanged ./dots/.ssh/**
 
 # To track them again:
 # git update-index --no-assume-unchanged ./dots/.aws/**

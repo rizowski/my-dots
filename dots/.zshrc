@@ -1,14 +1,14 @@
+source $HOMEBREW_PREFIX/share/antigen/antigen.zsh
+
 case $(uname) in
 Darwin)
   eval "$(rbenv init - zsh)"
-  source $HOME/.antigen/antigen.zsh
   HB_CNF_HANDLER="$HOMEBREW_PREFIX/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
   # Added by OrbStack: command-line tools and integration
   source ~/.orbstack/shell/init.zsh 2>/dev/null || :
   test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
   ;;
 Linux)
-  source $HOMEBREW_PREFIX/share/antigen/antigen.zsh
   HB_CNF_HANDLER="$HOMEBREW_PREFIX/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
   ;;
 esac

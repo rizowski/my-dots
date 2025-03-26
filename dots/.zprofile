@@ -15,8 +15,16 @@ set_ran_date() {
 
 should-update ~/bin/brew-update brew 7
 
-# FNM CD Hook
-eval "$(fnm env --use-on-cd --corepack-enabled --resolve-engines --version-file-strategy recursive)"
+NODE_VERSION=20
+
+eval "$(fnm env --use-on-cd --corepack-enabled --resolve-engines --version-file-strategy recursive)" 2 &>/dev/null
+if [ -z "$(fnm list | grep -v system)" ]; then
+  fnm install $NODE_VERSION && fnm default $NODE_VERSION
+else
+  if [ -z "$(fnm current)" ]; then
+    fnm default $NODE_VERSION
+  fi
+fi
 
 autoload -U add-zsh-hook
 
@@ -36,3 +44,7 @@ add-zsh-hook chpwd aws_auto_profile_hook &&
   aws_auto_profile_hook
 
 fpath=(/usr/local/share/zsh-completions $fpath)
+
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :
