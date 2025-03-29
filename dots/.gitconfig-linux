@@ -9,3 +9,9 @@
 
 [commit]
   gpgsign = true
+
+[merge]
+  tool = meld
+
+[mergetool "meld"]
+  cmd = "flatpak run org.gnome.meld --auto-merge \"$PWD/$LOCAL\" \"$PWD/$BASE\" \"$PWD/$REMOTE\" --output=\"$PWD/$MERGED\""

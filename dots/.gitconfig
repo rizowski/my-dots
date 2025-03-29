@@ -26,7 +26,7 @@ email = crouska@gmail.com
 [includeIf "gitdir:/Users/**"]
 path=~/.gitconfig-mac
 
-[includeIf "gitdir:/home/"]
+[includeIf "gitdir:/home/**"]
 path=~/.gitconfig-linux
 
 [includeIf "gitdir:~/git/work/**"]

@@ -179,3 +179,4 @@ mas "WhatsApp", id: 1147396723
 mas "WiFi Explorer", id: 494803304
 mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835
+mas "WhatsApp", id: 310633997

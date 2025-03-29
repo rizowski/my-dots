@@ -10,6 +10,8 @@ Darwin)
 Linux)
   sudo apt update
   sudo apt upgrade -y
+  sudo apt install zsh podman -y
+  sudo chsh -s $(which zsh) $USER
   export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
   ;;
 esac
