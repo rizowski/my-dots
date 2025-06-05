@@ -38,10 +38,8 @@ antigen use oh-my-zsh
 # antigen cache-gen # breaks current command autocomplete and validation input
 
 antigen bundles <<EOBUNDLES
-  Aloxaf/fzf-tab
   akoenig/npm-run.plugin.zsh
   sudo
-  changyuheng/fz
   colored-man-pages
   command-not-found
   docker-compose
