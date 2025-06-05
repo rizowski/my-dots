@@ -8,6 +8,7 @@ Darwin)
   export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
   export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
   export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+  export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
   ;;
 Linux)
   export ONEPASS_SSH_AGENT_PATH="$HOME/.1password/agent.sock"

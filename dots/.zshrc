@@ -3,6 +3,10 @@ source $HOMEBREW_PREFIX/share/antigen/antigen.zsh
 case $(uname) in
 Darwin)
   eval "$(rbenv init - zsh)"
+  if [ ! -d "$HOME/.antigen" ] || [ ! -f "$HOME/.antigen/antigen.zsh" ]; then
+    mkdir -p "$HOME/.antigen"
+    curl -L git.io/antigen >"$HOME/.antigen/antigen.zsh"
+  fi
   source $HOME/.antigen/antigen.zsh
   HB_CNF_HANDLER="$HOMEBREW_PREFIX/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
   # Added by OrbStack: command-line tools and integration
@@ -10,6 +14,10 @@ Darwin)
   test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
   ;;
 Linux)
+  if [ ! -d "$HOMEBREW_PREFIX/.antigen" ] || [ ! -f "$HOMEBREW_PREFIX/.antigen/antigen.zsh" ]; then
+    mkdir -p "$HOMEBREW_PREFIX/.antigen"
+    curl -L git.io/antigen >"$HOMEBREW_PREFIX/.antigen/antigen.zsh"
+  fi
   source $HOMEBREW_PREFIX/share/antigen/antigen.zsh
   HB_CNF_HANDLER="$HOMEBREW_PREFIX/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
   ;;
@@ -20,33 +28,30 @@ if [ -f "$HB_CNF_HANDLER" ]; then
 fi
 
 autoload -U colors && colors
-# for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
-#   eval $COLOR='$fg_no_bold[${(L)COLOR}]' #wrap colours between %{ %} to avoid weird gaps in autocomplete
-#   eval BOLD_$COLOR='$fg_bold[${(L)COLOR}]'
-# done
-# eval RESET='%{$reset_color%}'
+autoload -Uz compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
 
 eval "$(zoxide init zsh)"
 
 # zmodload zsh/zprof
 antigen use oh-my-zsh
+# antigen cache-gen # breaks current command autocomplete and validation input
 
 antigen bundles <<EOBUNDLES
+  Aloxaf/fzf-tab
+  akoenig/npm-run.plugin.zsh
+  sudo
+  changyuheng/fz
+  colored-man-pages
+  command-not-found
   docker-compose
   git
-  zsh-users/zsh-syntax-highlighting
-  zsh-users/zsh-autosuggestions
-  colored-man-pages
-  unixorn/autoupdate-antigen.zshplugin
-  akoenig/npm-run.plugin.zsh
-  zsh-users/zsh-history-substring-search
-  command-not-found
   supercrabtree/k
-  cache-gen
+  unixorn/autoupdate-antigen.zshplugin
+  zsh-users/zsh-autosuggestions
+  zsh-users/zsh-history-substring-search
+  zsh-users/zsh-syntax-highlighting
 EOBUNDLES
-
-# antigen bundle changyuheng/fz
-# antigen bundle Aloxaf/fzf-tab
 
 case $(uname) in
 Darwin)
@@ -79,5 +84,3 @@ source ~/.aliases
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-autoload -U +X bashcompinit && bashcompinit
