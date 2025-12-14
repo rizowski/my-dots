@@ -5,6 +5,9 @@ Darwin)
   export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
   # Added by OrbStack: command-line tools and integration
   source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+  export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
+  export PATH="/opt/homebrew/opt/llvm/bin:$PATH" # required for rust
+  export PATH="$HOME/.cargo/bin:$PATH"
   export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
   export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
   export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
