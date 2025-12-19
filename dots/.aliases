@@ -4,4 +4,6 @@ alias nvm='fnm'
 alias python=/usr/local/bin/python3
 alias cat=bat
 alias ls=eza
+# alias aws='op plugin run -- aws'
+# alias gh='op plugin run -- gh'
 #alias ls=k

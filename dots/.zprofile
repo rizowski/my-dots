@@ -1,3 +1,4 @@
+# source ~/.op/plugins.sh 2>/dev/null
 # https://github.com/keybase/keybase-issues/issues/1712#issuecomment-141226705
 export GPG_TTY=$(tty)
 
@@ -35,7 +36,11 @@ aws_auto_profile_hook() {
 
   profile=$(cat "$file")
 
-  [[ -z "$profile" ]] && echo ".aws-profile was empty.\nNo profile found $file" && return
+  [[ -z "$profile" ]] && echo -e ".aws-profile was empty.\nNo profile found $file" && return
+
+  if [[ "$AWS_PROFILE" != "$profile" ]]; then
+    echo "AWS_PROFILE changing from '${AWS_PROFILE:-unset}' to '$profile'"
+  fi
 
   export AWS_PROFILE="$profile"
 }
@@ -48,3 +53,7 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+
+# added by Snowflake SnowSQL installer v1.2
+export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
+export PATH=/opt/whalebrew/bin:$PATH

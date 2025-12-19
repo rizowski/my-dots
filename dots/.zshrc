@@ -76,9 +76,9 @@ antigen apply
 source <(fzf --zsh)
 eval "$(starship init zsh)"
 
-source ~/.config/op/plugins.sh
+# source ~/.config/op/plugins.sh
 source ~/.aliases
 
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
