@@ -9,8 +9,6 @@ Darwin)
   fi
   source $HOME/.antigen/antigen.zsh
   HB_CNF_HANDLER="$HOMEBREW_PREFIX/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
-  # Added by OrbStack: command-line tools and integration
-  source ~/.orbstack/shell/init.zsh 2>/dev/null || :
   test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
   ;;
 Linux)
@@ -82,3 +80,32 @@ source ~/.aliases
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# proto
+export PROTO_HOME="$HOME/.proto";
+export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
+
+# Added by GitButler installer
+export PATH="$HOME/.local/bin:$PATH"
+eval "$(but completions zsh)"
+
+aws_auto_profile_hook() {
+  file=$(upfind .aws-profile)
+
+  [[ -z "$file" ]] && unset AWS_PROFILE && return
+
+  profile=$(cat "$file")
+
+  [[ -z "$profile" ]] && echo -e ".aws-profile was empty.\nNo profile found $file" && return
+
+  if [[ "$AWS_PROFILE" != "$profile" ]]; then
+    echo "AWS_PROFILE changing from '${AWS_PROFILE:-unset}' to '$profile'"
+  fi
+
+  export AWS_PROFILE="$profile"
+}
+
+add-zsh-hook chpwd aws_auto_profile_hook &&
+  aws_auto_profile_hook
+
+[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"

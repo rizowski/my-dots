@@ -29,31 +29,13 @@ fi
 
 autoload -U add-zsh-hook
 
-aws_auto_profile_hook() {
-  file=$(upfind .aws-profile)
-
-  [[ -z "$file" ]] && unset AWS_PROFILE && return
-
-  profile=$(cat "$file")
-
-  [[ -z "$profile" ]] && echo -e ".aws-profile was empty.\nNo profile found $file" && return
-
-  if [[ "$AWS_PROFILE" != "$profile" ]]; then
-    echo "AWS_PROFILE changing from '${AWS_PROFILE:-unset}' to '$profile'"
-  fi
-
-  export AWS_PROFILE="$profile"
-}
-
-add-zsh-hook chpwd aws_auto_profile_hook &&
-  aws_auto_profile_hook
-
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-# Added by OrbStack: command-line tools and integration
-# This won't be added again if you remove it.
-source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+case $(uname) in
+Darwin)
+  export PATH=/opt/whalebrew/bin:$PATH
+  ;;
+esac
 
-# added by Snowflake SnowSQL installer v1.2
-export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
-export PATH=/opt/whalebrew/bin:$PATH
+[ -f "$HOME/.zprofile.local" ] && source "$HOME/.zprofile.local"
+

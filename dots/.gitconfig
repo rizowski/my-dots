@@ -30,7 +30,7 @@ path=~/.gitconfig-mac
 path=~/.gitconfig-linux
 
 [includeIf "gitdir:~/git/work/**"]
-path = ~/.gitconfig-work
+path = ~/.gitconfig-work.local
 
 [core]
 autocrlf = input
@@ -77,7 +77,7 @@ ui = auto
 [rerere]
 enabled = true
 [pack]
-usePathWalk = true
+	usePathWalk = true
 [fetch]
 prune = true
 pruneTags = true

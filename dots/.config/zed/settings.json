@@ -7,15 +7,28 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "vim_mode": true,
-  "features": {
-    "edit_prediction_provider": "zed"
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    }
   },
-  "ui_font_size": 16,
-  "buffer_font_size": 16,
+  "buffer_font_family": "Monaspace Argon Var",
+  "icon_theme": "Material Icon Theme",
+  "vim_mode": true,
+  "ui_font_size": 14,
+  "ui_font_family": "Monaspace Argon Var",
+  "buffer_font_size": 12,
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "One Dark"
-  }
+    "dark": "Tomorrow at Midnight",
+  },
+  "lsp": {
+    "biome": {
+      "binary": {
+        "path": "yarn",
+        "arguments": ["exec", "biome", "lsp-proxy"],
+      },
+    },
+  },
 }

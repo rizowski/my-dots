@@ -1,5 +1,4 @@
 dots/.aws/
-dots/.aws/
 
 # General
 .DS_Store
@@ -28,23 +27,41 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-dots/.config/iterm2
-dots/.config/btop
-dots/.config/configstore
-dots/.config/op/plugins
-dots/.config/op/config
-dots/.config/yarn
-dots/.config/asciinema
-dots/.config/testcontainers
-dots/.config/dot-settings
 dots/.gnupg/*.kbx
 dots/.gnupg/*.gpg
-dots/.config/github-copilot
 
-dots/.config/zed
+# dots/.config is symlinked into $HOME, so app writes land here automatically.
+# Allowlist only the files/dirs we explicitly track. Anything else is ignored
+# by default so new files can't leak (tokens, sockets, caches, work references).
+dots/.config/*
+!dots/.config/gh/
+!dots/.config/gh-copilot/
+!dots/.config/nix/
+!dots/.config/op/
+!dots/.config/starship.toml
+!dots/.config/zed/
+
+dots/.config/gh/*
+!dots/.config/gh/config.yml
+!dots/.config/gh/hosts.yml
+
+dots/.config/gh-copilot/*
+!dots/.config/gh-copilot/config.yml
+
+dots/.config/nix/*
+!dots/.config/nix/nix.conf
+
+dots/.config/op/*
+!dots/.config/op/plugins.sh
+
+dots/.config/zed/*
 !dots/.config/zed/settings.json
 
 dots/.ssh
 !dots/.ssh/agent
 
 *.log
+
+# Local overlays — never tracked, user-maintained in $HOME
+*.local
+dots/.gitconfig-work

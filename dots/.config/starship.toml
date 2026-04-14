@@ -1,3 +1,6 @@
+command_timeout = 1000
+format = """$username$hostname$shlvl${custom.dir}$git_branch$git_commit$git_state$git_status$docker_context$package$dart$elixir$elm$golang$hg_branch$java$julia$nim$nodejs$perl$php$python$ruby$rust$scala$swift$terraform$nix_shell$conda$memory_usage$aws$cmd_duration$line_break$jobs$time$character"""
+
 [aws]
 format = "[$symbol$profile(\\($region\\))]($style) "
 
@@ -6,8 +9,37 @@ format = "[$symbol$profile(\\($region\\))]($style) "
 [dart]
 
 [directory]
-truncate_to_repo = false
-truncation_length = 2
+disabled = true
+
+[custom.dir]
+when = "true"
+shell = ["bash", "--noprofile", "--norc"]
+format = "[$output]($style) "
+style = "bold cyan"
+command = '''
+path="${PWD/#$HOME/\~}"
+case "$PWD" in
+  *infrastructure/terraform/crumbl/*)
+    after="${PWD#*infrastructure/terraform/crumbl/}"
+    region="${after%%/*}"
+    rest="${after#*/}"
+    if [ "$rest" = "$after" ]; then
+      printf '(%s)' "$region"
+    else
+      printf '(%s):%s' "$region" "$rest"
+    fi
+    ;;
+  *)
+    IFS='/' read -ra parts <<< "$path"
+    len=${#parts[@]}
+    if [ "$len" -le 2 ]; then
+      printf '%s' "$path"
+    else
+      printf '%s/%s' "${parts[$((len-2))]}" "${parts[$((len-1))]}"
+    fi
+    ;;
+esac
+'''
 
 [docker_context]
 format = "[$symbol$context]($style) "
