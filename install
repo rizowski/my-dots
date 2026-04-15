@@ -201,16 +201,31 @@ else
   (cd dots && stow -t ~/.config .config)
 fi
 
-# ignore any changes to these files
-# they do need to be added to the gitignore after they are first tracked and comitted
-git update-index --assume-unchanged ./dots/.aws/** 2>/dev/null
+# .aws/ is gitignored; .ssh stays tracked with --assume-unchanged for now.
 git update-index --assume-unchanged ./dots/.ssh/** 2>/dev/null
-
-# To track them again:
-# git update-index --no-assume-unchanged ./dots/.aws/**
 
 [ -d ~/.config/op ] && chmod 700 ~/.config/op
 
 brew bundle install --global
 
 [ -f "$HOME/.Brewfile.local" ] && brew bundle install --file="$HOME/.Brewfile.local"
+
+setup_brew_launchd() {
+  [ "$(uname)" = "Darwin" ] || return 0
+  local src_dir="$PWD/dots/Library/LaunchAgents"
+  local dst_dir="$HOME/Library/LaunchAgents"
+  mkdir -p "$dst_dir" "$HOME/.cache/dot-brew"
+  local plist label dst
+  for plist in "$src_dir"/com.rizowski.brew-*.plist; do
+    [ -f "$plist" ] || continue
+    label=$(basename "$plist" .plist)
+    dst="$dst_dir/$(basename "$plist")"
+    cp "$plist" "$dst"
+    launchctl bootout "gui/$UID/$label" 2>/dev/null
+    launchctl bootstrap "gui/$UID" "$dst"
+  done
+  # Seed the summary so the first new shell has something to print.
+  [ -x "$HOME/bin/brew-check" ] && "$HOME/bin/brew-check" >/dev/null 2>&1 &
+}
+
+setup_brew_launchd

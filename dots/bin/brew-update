@@ -1,14 +1,28 @@
 #!/bin/bash
 
+set -u
+
 brew=/opt/homebrew/bin/brew
+cache_dir="$HOME/.cache/dot-brew"
+last_upgrade="$cache_dir/last-upgrade"
+
+mkdir -p "$cache_dir"
 
 echo "Starting to update brew"
-$brew update
+"$brew" update
 
 echo "Upgrading outdated software"
-$brew upgrade # --greedy
+# Detach stdin so casks needing sudo fail fast under launchd (no TTY)
+# instead of hanging. Failures are re-reported in the next brew-check.
+"$brew" upgrade </dev/null # --greedy
 
 echo "Cleaning up casks and brews"
-$brew cleanup --prune 25
+"$brew" cleanup --prune 25
+
+date +%s >"$last_upgrade"
+
+if [ -x "$HOME/bin/brew-check" ]; then
+  "$HOME/bin/brew-check" || true
+fi
 
 echo "Completed update"

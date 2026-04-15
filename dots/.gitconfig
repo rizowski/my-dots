@@ -21,7 +21,7 @@ rebase = true
 
 [user]
 name = Colten Rouska
-email = crouska@gmail.com
+	email = crouska@gmail.com
 
 [includeIf "gitdir:/Users/**"]
 path=~/.gitconfig-mac
@@ -74,8 +74,6 @@ simple = true
 autoSetupRemote = true
 [color]
 ui = auto
-[rerere]
-enabled = true
 [pack]
 	usePathWalk = true
 [fetch]

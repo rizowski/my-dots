@@ -10,11 +10,7 @@ fi
 # who cares about casing? I don't
 set completion-ignore-case on
 
-set_ran_date() {
-  echo $(($(date +%s) / 60 / 60 / 24)) >$1
-}
-
-should-update ~/bin/brew-update brew 7
+[ -s "$HOME/.cache/dot-brew/summary.txt" ] && cat "$HOME/.cache/dot-brew/summary.txt"
 
 NODE_VERSION=20
 
