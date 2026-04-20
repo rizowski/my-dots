@@ -7,6 +7,8 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "use_smartcase_search": true,
+  "base_keymap": "Cursor",
   "agent_servers": {
     "claude-acp": {
       "type": "registry"
