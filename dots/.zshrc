@@ -1,22 +1,21 @@
-source $HOMEBREW_PREFIX/share/antigen/antigen.zsh
+### Zinit bootstrap
+ZINIT_HOME="$HOME/.local/share/zinit/zinit.git"
+if [[ ! -f "$ZINIT_HOME/zinit.zsh" ]]; then
+  print -P "%F{33}Installing zinit...%f"
+  command mkdir -p "$(dirname "$ZINIT_HOME")" && command chmod g-rwX "$(dirname "$ZINIT_HOME")"
+  command git clone https://github.com/zdharma-continuum/zinit "$ZINIT_HOME"
+fi
+source "$ZINIT_HOME/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
 case $(uname) in
 Darwin)
   eval "$(rbenv init - zsh)"
-  if [ ! -d "$HOME/.antigen" ] || [ ! -f "$HOME/.antigen/antigen.zsh" ]; then
-    mkdir -p "$HOME/.antigen"
-    curl -L git.io/antigen >"$HOME/.antigen/antigen.zsh"
-  fi
-  source $HOME/.antigen/antigen.zsh
   HB_CNF_HANDLER="$HOMEBREW_PREFIX/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
   test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
   ;;
 Linux)
-  if [ ! -d "$HOMEBREW_PREFIX/.antigen" ] || [ ! -f "$HOMEBREW_PREFIX/.antigen/antigen.zsh" ]; then
-    mkdir -p "$HOMEBREW_PREFIX/.antigen"
-    curl -L git.io/antigen >"$HOMEBREW_PREFIX/.antigen/antigen.zsh"
-  fi
-  source $HOMEBREW_PREFIX/share/antigen/antigen.zsh
   HB_CNF_HANDLER="$HOMEBREW_PREFIX/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
   ;;
 esac
@@ -28,48 +27,47 @@ fi
 autoload -U colors && colors
 autoload -Uz compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
+autoload -Uz add-zsh-hook
 
 eval "$(zoxide init zsh)"
 
-# zmodload zsh/zprof
-antigen use oh-my-zsh
-# antigen cache-gen # breaks current command autocomplete and validation input
+# OMZ libraries that the plugins/keybindings below depend on.
+zinit snippet OMZL::git.zsh
+zinit snippet OMZL::key-bindings.zsh
 
-antigen bundles <<EOBUNDLES
-  akoenig/npm-run.plugin.zsh
-  sudo
-  colored-man-pages
-  command-not-found
-  docker-compose
-  git
-  supercrabtree/k
-  unixorn/autoupdate-antigen.zshplugin
-  zsh-users/zsh-autosuggestions
-  zsh-users/zsh-history-substring-search
-  zsh-users/zsh-syntax-highlighting
-EOBUNDLES
+# OMZ plugins
+zinit snippet OMZP::git
+zinit snippet OMZP::git-auto-fetch
+zinit snippet OMZP::gh
+zinit snippet OMZP::sudo
+zinit snippet OMZP::colored-man-pages
+zinit snippet OMZP::command-not-found
+zinit snippet OMZP::docker-compose
+zinit snippet OMZP::kubectl
+zinit snippet OMZP::aws
+zinit snippet OMZP::extract
 
-case $(uname) in
-Darwin)
-  # Commands for OS X go here
-  antigen bundle macos
-  ;;
-Linux)
-  # Commands for Linux go here
-  ;;
-esac
+# External plugins. fzf-tab must load before autosuggestions/syntax-highlighting;
+# fast-syntax-highlighting must load last.
+zinit light akoenig/npm-run.plugin.zsh
+zinit light supercrabtree/k
+zinit light Aloxaf/fzf-tab
+zinit light MichaelAquilina/zsh-you-should-use
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-history-substring-search
+zinit light zdharma-continuum/fast-syntax-highlighting
+
+# Make fast-syntax-highlighting color known commands like zsh-syntax-highlighting does.
+FAST_HIGHLIGHT_STYLES[command]=fg=green
+FAST_HIGHLIGHT_STYLES[builtin]=fg=green
+FAST_HIGHLIGHT_STYLES[function]=fg=green
+FAST_HIGHLIGHT_STYLES[alias]=fg=green
+FAST_HIGHLIGHT_STYLES[precommand]=fg=green,underline
+FAST_HIGHLIGHT_STYLES[unknown-token]=fg=red,bold
 
 setopt INC_APPEND_HISTORY
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_DUPS
-
-# workaround for https://github.com/zsh-users/antigen/issues/675
-THEME=robbyrussell
-antigen list | grep $THEME
-if [ $? -ne 0 ]; then antigen theme $THEME; fi
-# antigen theme robbyrussell
-
-antigen apply
 
 source <(fzf --zsh)
 eval "$(starship init zsh)"

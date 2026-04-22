@@ -13,7 +13,6 @@ Darwin)
   export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
   export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
   export PATH="$HOME/Library/Python/3.9/bin:$PATH"
-  export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
   ;;
 Linux)
   export ONEPASS_SSH_AGENT_PATH="$HOME/.1password/agent.sock"
@@ -30,6 +29,6 @@ export PATH="$HOMEBREW_PREFIX/opt/ruby/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/ruby@2.7/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
-. "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 [ -f "$HOME/.zshenv.local" ] && source "$HOME/.zshenv.local"

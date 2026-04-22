@@ -97,6 +97,26 @@ confirm() {
   fi
 }
 
+detect_computer_type() {
+  # Echoes "personal" or "work". Honors $DOTS_COMPUTER_TYPE; defaults to
+  # "personal" in non-interactive shells.
+  if [ -n "$DOTS_COMPUTER_TYPE" ]; then
+    echo "$DOTS_COMPUTER_TYPE"
+    return
+  fi
+  if ! interactive; then
+    echo "personal"
+    return
+  fi
+  local answer
+  if has_gum; then
+    answer=$(gum choose --header "What kind of computer is this?" "personal" "work")
+  else
+    read -r -p "What kind of computer is this? [personal/work]: " answer </dev/tty
+  fi
+  echo "${answer:-personal}"
+}
+
 pick_op_signing_key() {
   # Echoes an ssh public key pulled from 1Password, or empty on failure/cancel.
   command -v op >/dev/null 2>&1 || return 0
@@ -174,19 +194,26 @@ setup_zprofile_local() {
   echo "Wrote $target"
 }
 
-# Unattended stubs for overlays that rarely need seed content.
-scaffold_local "$HOME/.zshenv.local" '# Local zshenv overlay — env vars, secrets, work paths. Not tracked.'
-scaffold_local "$HOME/.zshrc.local" '# Local zshrc overlay — interactive shell tweaks. Not tracked.'
-scaffold_local "$HOME/.aliases.local" '# Local aliases overlay. Not tracked.'
-scaffold_local "$HOME/.profile.local" '# Local profile overlay (bash fallback). Not tracked.'
-scaffold_local "$HOME/.Brewfile.local" '# Local Brewfile overlay — work-only taps/casks. Not tracked.'
+computer_type=$(detect_computer_type)
+echo "Computer type: $computer_type"
 
-if interactive; then
-  setup_gitconfig_work
-  setup_zprofile_local
+if [ "$computer_type" = "work" ]; then
+  # Unattended stubs for overlays that rarely need seed content.
+  scaffold_local "$HOME/.zshenv.local" '# Local zshenv overlay — env vars, secrets, work paths. Not tracked.'
+  scaffold_local "$HOME/.zshrc.local" '# Local zshrc overlay — interactive shell tweaks. Not tracked.'
+  scaffold_local "$HOME/.aliases.local" '# Local aliases overlay. Not tracked.'
+  scaffold_local "$HOME/.profile.local" '# Local profile overlay (bash fallback). Not tracked.'
+  scaffold_local "$HOME/.Brewfile.local" '# Local Brewfile overlay — work-only taps/casks. Not tracked.'
+
+  if interactive; then
+    setup_gitconfig_work
+    setup_zprofile_local
+  else
+    scaffold_local "$HOME/.gitconfig-work.local" $'[user]\n\tname = \n\temail = \n\tsigningkey = '
+    scaffold_local "$HOME/.zprofile.local" '# Local zprofile overlay — login-shell PATH additions. Not tracked.'
+  fi
 else
-  scaffold_local "$HOME/.gitconfig-work.local" $'[user]\n\tname = \n\temail = \n\tsigningkey = '
-  scaffold_local "$HOME/.zprofile.local" '# Local zprofile overlay — login-shell PATH additions. Not tracked.'
+  echo "Skipping work overlays (personal machine)"
 fi
 
 # From here down, individual failures shouldn't abort the whole install.
@@ -209,6 +236,44 @@ git update-index --assume-unchanged ./dots/.ssh/** 2>/dev/null
 brew bundle install --global
 
 [ -f "$HOME/.Brewfile.local" ] && brew bundle install --file="$HOME/.Brewfile.local"
+
+apply_uninstalls() {
+  local list="$PWD/uninstall.list"
+  [ -f "$list" ] || return 0
+  echo
+  echo "-- Applying $list --"
+  local kind id removed=0
+  while IFS= read -r line; do
+    [[ -z "$line" || "$line" =~ ^[[:space:]]*# ]] && continue
+    read -r kind id _rest <<<"$line"
+    case "$kind" in
+      brew)
+        if brew list --formula 2>/dev/null | grep -qx "$id"; then
+          echo "  uninstalling brew $id"
+          brew uninstall --ignore-dependencies "$id" >/dev/null 2>&1 && removed=$((removed + 1))
+        fi
+        ;;
+      cask)
+        if brew list --cask 2>/dev/null | grep -qx "$id"; then
+          echo "  uninstalling cask $id"
+          brew uninstall --cask "$id" >/dev/null 2>&1 && removed=$((removed + 1))
+        fi
+        ;;
+      vscode)
+        if command -v code >/dev/null 2>&1 && code --list-extensions 2>/dev/null | grep -qx "$id"; then
+          echo "  uninstalling vscode extension $id"
+          code --uninstall-extension "$id" >/dev/null 2>&1 && removed=$((removed + 1))
+        fi
+        ;;
+      *)
+        echo "  unknown kind '$kind' (line: $line)" >&2
+        ;;
+    esac
+  done <"$list"
+  echo "  $removed item(s) removed this run"
+}
+
+apply_uninstalls
 
 setup_brew_launchd() {
   [ "$(uname)" = "Darwin" ] || return 0

@@ -23,14 +23,29 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Tomorrow at Midnight",
+    "dark": "Tomorrow at Midnight"
   },
   "lsp": {
     "biome": {
       "binary": {
         "path": "yarn",
-        "arguments": ["exec", "biome", "lsp-proxy"],
-      },
+        "arguments": ["exec", "biome", "lsp-proxy"]
+      }
     },
-  },
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        },
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        }
+      },
+      "enable_lsp_tasks": true
+    }
+  }
 }

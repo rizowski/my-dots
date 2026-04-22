@@ -1,0 +1,27 @@
+# uninstall.list — things to remove on every `./install` run, on every machine.
+#
+# Format: one entry per line, "<kind> <identifier>". Lines starting with # and
+# blank lines are ignored. Removed entries are checked before uninstalling, so
+# missing packages are a silent no-op.
+#
+# Supported kinds:
+#   brew    <formula>         brew uninstall
+#   cask    <name>            brew uninstall --cask
+#   vscode  <publisher.ext>   code --uninstall-extension
+#
+# Keep entries here indefinitely — they need to catch stale machines that
+# haven't pulled in a while. The cost of re-checking an already-absent package
+# is trivial.
+
+brew antigen
+brew python@3.8
+brew icu4c@76
+brew ruby@3.1
+brew ykpers
+brew fnm
+cask headlamp
+cask unetbootin
+cask hiddenbar
+cask charles
+cask android-commandlinetools
+cask trilium-notes

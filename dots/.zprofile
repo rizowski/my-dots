@@ -12,17 +12,6 @@ set completion-ignore-case on
 
 [ -s "$HOME/.cache/dot-brew/summary.txt" ] && cat "$HOME/.cache/dot-brew/summary.txt"
 
-NODE_VERSION=20
-
-eval "$(fnm env --use-on-cd --corepack-enabled --resolve-engines --version-file-strategy recursive)" 2 &>/dev/null
-if [ -z "$(fnm list | grep -v system)" ]; then
-  fnm install $NODE_VERSION && fnm default $NODE_VERSION
-else
-  if [ -z "$(fnm current)" ]; then
-    fnm default $NODE_VERSION
-  fi
-fi
-
 autoload -U add-zsh-hook
 
 fpath=(/usr/local/share/zsh-completions $fpath)
@@ -35,3 +24,6 @@ esac
 
 [ -f "$HOME/.zprofile.local" ] && source "$HOME/.zprofile.local"
 
+
+# added by Snowflake SnowSQL installer v1.2
+export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH

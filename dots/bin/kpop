@@ -1,30 +1,76 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-if [ -z "$1" ]; then
-  echo "Usage: $0 <port/service>"
+# kpop — interactive fzf picker for killing TCP listeners.
+# Usage: kpop [initial-query]
+
+if ! command -v fzf >/dev/null 2>&1; then
+  echo "kpop requires fzf. Install it with: brew install fzf" >&2
   exit 1
 fi
 
-matches=$(sudo lsof -i -P | grep "$1 (LISTEN)")
+if sudo -n true 2>/dev/null; then
+  sudo_wrap='sudo -n'
+else
+  sudo_wrap=''
+fi
+lsof_cmd="$sudo_wrap lsof -iTCP -sTCP:LISTEN -P -n"
 
-if [ -z "$matches" ]; then
-  echo "No processes found listening for '$1'."
-  exit 0
+trap 'echo; echo "Aborted."; exit 130' INT
+
+selected=$($lsof_cmd | fzf \
+  --multi \
+  --select-1 \
+  --exit-0 \
+  --tiebreak=begin,length,index \
+  --header-lines=1 \
+  --header 'TAB: multi-select   ENTER: kill   CTRL-R: refresh   ESC: quit' \
+  --prompt 'kpop> ' \
+  --query "${1:-}" \
+  --delimiter='[[:space:]]+' \
+  --preview 'ps -o pid,ppid,user,%cpu,%mem,etime,command -p {2} 2>/dev/null || echo "(process gone)"' \
+  --preview-window 'down,7,border-top' \
+  --bind "ctrl-r:reload($lsof_cmd)" || true)
+
+[ -z "$selected" ] && { echo "Nothing selected."; exit 0; }
+
+pids=$(awk '!seen[$2]++ {print $2}' <<<"$selected")
+
+echo "About to terminate:"
+echo "$selected"
+printf '\nConfirm [y/N] '
+read -r reply || reply=""
+case "$reply" in
+  y|Y|yes|YES) ;;
+  *) echo "Aborted."; exit 0;;
+esac
+
+send_signal() {
+  local sig=$1 pid
+  shift
+  for pid in "$@"; do
+    $sudo_wrap kill -"$sig" "$pid" 2>/dev/null || true
+  done
+}
+
+# shellcheck disable=SC2086
+send_signal TERM $pids
+
+# Poll briefly for clean exit before escalating to SIGKILL.
+survivors=""
+for _ in 1 2 3 4 5 6 7 8 9 10; do
+  survivors=""
+  for pid in $pids; do
+    kill -0 "$pid" 2>/dev/null && survivors+="$pid "
+  done
+  [ -z "$survivors" ] && break
+  sleep 0.2
+done
+
+if [ -n "$survivors" ]; then
+  echo "Still alive after SIGTERM; sending SIGKILL: $survivors"
+  # shellcheck disable=SC2086
+  send_signal KILL $survivors
 fi
 
-echo "Processes found:"
-echo "$matches"
-
-pids=($(echo "$matches" | awk '{print $2}'))
-echo "Select the PID to kill:"
-
-select pid in "${pids[@]}"; do
-  if [[ -n "$pid" ]]; then
-    echo "Killing PID $pid..."
-    sudo kill -9 "$pid"
-    echo "PID $pid has been terminated."
-    break
-  else
-    echo "Invalid selection. Try again."
-  fi
-done
+echo "Done."
