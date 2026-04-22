@@ -7,6 +7,12 @@ update = "!f(){ git fetch origin \"$1\" && git pull --rebase --autostash origin 
 bl = !git branch -l --color --sort -committerdate --format='%(committerdate:relative) - %(refname:short)' | grep -v 'HEAD' # | head -n 10
 blr = !git branch -r --color --sort -committerdate --format='%(committerdate:relative) - %(refname:short)' | grep -v 'HEAD' | head -n 10
 oc = checkout
+amend = commit --amend --no-edit
+unstage = reset HEAD --
+last = log -1 HEAD --stat
+undo = reset --soft HEAD~1
+root = rev-parse --show-toplevel
+aliases = !git config --get-regexp ^alias\\. | sed 's/^alias\\.//'
 
 #[remote "origin"]
 #  fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
@@ -17,7 +23,7 @@ keepBackup = false
 prompt = false
 
 [commit]
-rebase = true
+verbose = true
 
 [user]
 name = Colten Rouska
@@ -50,9 +56,21 @@ show = delta
 
 [diff]
 algorithm = histogram
-colorMoved = plain
+colorMoved = zebra
 renames = true
 mnemonicPrefix = true
+
+[merge]
+conflictstyle = zdiff3
+
+[branch]
+sort = -committerdate
+
+[tag]
+sort = version:refname
+
+[column]
+ui = auto
 [delta]
 features = side-by-side line-numbers decorations dark
 plus-style = syntax "#003800"
@@ -69,8 +87,8 @@ diffFilter = delta --color-only --features=interactive
 
 [rebase]
 autostash = true
+updateRefs = true
 [push]
-simple = true
 autoSetupRemote = true
 [color]
 ui = auto
@@ -80,9 +98,16 @@ ui = auto
 prune = true
 pruneTags = true
 all = true
+fsckObjects = true
+
+[transfer]
+fsckObjects = true
+
+[receive]
+fsckObjects = true
 
 [help]
-autocorrect = 1
+autocorrect = prompt
 [rerere]
 enabled = true
 autoupdate = true
