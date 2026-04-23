@@ -37,7 +37,6 @@ zinit snippet OMZL::key-bindings.zsh
 
 # OMZ plugins
 zinit snippet OMZP::git
-zinit snippet OMZP::git-auto-fetch
 zinit snippet OMZP::gh
 zinit snippet OMZP::sudo
 zinit snippet OMZP::colored-man-pages

@@ -15,7 +15,11 @@
     }
   },
   "buffer_font_family": "Monaspace Argon Var",
-  "icon_theme": "Material Icon Theme",
+  "icon_theme": {
+    "mode": "system",
+    "light": "Material Icon Theme",
+    "dark": "Material Icon Theme"
+  },
   "vim_mode": true,
   "ui_font_size": 14,
   "ui_font_family": "Monaspace Argon Var",
@@ -23,7 +27,7 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Tomorrow at Midnight"
+    "dark": "Ayu Dark"
   },
   "lsp": {
     "biome": {
