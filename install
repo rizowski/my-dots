@@ -228,6 +228,9 @@ else
   (cd dots && stow -t ~/.config .config)
 fi
 
+mkdir -p "$HOME/.claude"
+(cd dots && stow -t ~/.claude .claude)
+
 # .aws/ is gitignored; .ssh stays tracked with --assume-unchanged for now.
 git update-index --assume-unchanged ./dots/.ssh/** 2>/dev/null
 

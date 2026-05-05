@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+input=$(cat)
+
+cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // ""')
+model=$(echo "$input" | jq -r '.model.display_name // ""')
+used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
+five_hour=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
+five_hour_resets_at=$(echo "$input" | jq -r '.rate_limits.five_hour.resets_at // empty')
+seven_day=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
+seven_day_resets_at=$(echo "$input" | jq -r '.rate_limits.seven_day.resets_at // empty')
+vim_mode=$(echo "$input" | jq -r '.vim.mode // empty')
+worktree_branch=$(echo "$input" | jq -r '.worktree.branch // empty')
+
+RST='\033[0m' DIM='\033[2m'
+CYN='\033[36m' GRN='\033[32m' YEL='\033[33m' RED='\033[31m' MAG='\033[35m' BLU='\033[34m'
+
+color_pct() {
+  local v=$(printf "%.0f" "$1")
+  if [ "$v" -ge 80 ]; then echo "$RED"
+  elif [ "$v" -ge 50 ]; then echo "$YEL"
+  else echo "$GRN"; fi
+}
+
+fmt_countdown() {
+  local resets_at="$1" total_secs="$2" usage_pct="$3"
+  local sl=$(( resets_at - $(date +%s) ))
+  [ "$sl" -le 0 ] && return
+  local h=$(( sl / 3600 )) m=$(( (sl % 3600) / 60 ))
+  [ "$h" -gt 0 ] && local t="${h}h${m}m" || local t="${m}m"
+  local elapsed_pct=$(( (total_secs - sl) * 100 / total_secs ))
+  local u=$(printf "%.0f" "$usage_pct")
+  local c="$GRN"
+  if [ "$total_secs" -eq 18000 ] && [ "$sl" -lt 3600 ]; then
+    c="$GRN"
+  elif [ "$total_secs" -eq 604800 ] && [ "$sl" -lt 86400 ]; then
+    c="$GRN"
+  elif [ "$elapsed_pct" -ge 5 ] && [ "$u" -gt 0 ]; then
+    local ratio=$(( u * 100 / elapsed_pct ))
+    if [ "$ratio" -gt 150 ]; then c="$RED"
+    elif [ "$ratio" -gt 100 ]; then c="$YEL"; fi
+  fi
+  printf '%s' "${c}(${t})${RST}"
+}
+
+cwd="${cwd/#$HOME\/git\//}"
+cwd="${cwd/#$HOME/~}"
+
+branch=""
+if [ -n "$worktree_branch" ]; then
+  branch="$worktree_branch"
+elif [ -n "$cwd" ]; then
+  real="${cwd/#\~/$HOME}"
+  branch=$(git -C "$real" symbolic-ref --short HEAD 2>/dev/null || git -C "$real" rev-parse --short HEAD 2>/dev/null)
+fi
+
+out=""
+[ -n "$cwd" ] && out="${CYN}${cwd}${RST}"
+[ -n "$branch" ] && out="${out} ${DIM}on${RST} ${GRN}${branch}${RST}"
+[ -n "$model" ] && out="${out} ${DIM}|${RST} ${MAG}${model}${RST}"
+
+if [ -n "$used_pct" ]; then
+  p=$(printf "%.0f" "$used_pct")
+  out="${out} ${DIM}| ctx:${RST} $(color_pct "$used_pct")${p}%${RST}"
+fi
+
+if [ -n "$five_hour" ]; then
+  fh=$(printf "%.0f" "$five_hour")
+  part="5h:$(color_pct "$five_hour")${fh}%${RST}"
+  [ -n "$five_hour_resets_at" ] && part="${part}$(fmt_countdown "$five_hour_resets_at" 18000 "$five_hour")"
+  out="${out} ${DIM}|${RST} ${part}"
+fi
+
+if [ -n "$seven_day" ]; then
+  sd=$(printf "%.0f" "$seven_day")
+  part="7d:$(color_pct "$seven_day")${sd}%${RST}"
+  [ -n "$seven_day_resets_at" ] && part="${part}$(fmt_countdown "$seven_day_resets_at" 604800 "$seven_day")"
+  out="${out} ${DIM}|${RST} ${part}"
+fi
+
+if [ -n "$vim_mode" ]; then
+  [ "$vim_mode" = "INSERT" ] && vc="$YEL" || vc="$BLU"
+  out="${out} ${DIM}|${RST} ${vc}${vim_mode}${RST}"
+fi
+
+printf '%b' "$out"
