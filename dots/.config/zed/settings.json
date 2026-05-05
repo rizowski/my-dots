@@ -29,14 +29,14 @@
   "base_keymap": "VSCode",
   "agent_servers": {
     "claude-acp": {
-      "type": "registry"
-    }
+      "type": "registry",
+    },
   },
   "buffer_font_family": "Monaspace Argon Var",
   "icon_theme": {
     "mode": "system",
     "light": "Material Icon Theme",
-    "dark": "Material Icon Theme"
+    "dark": "Material Icon Theme",
   },
   "vim_mode": true,
   "ui_font_size": 14,
@@ -45,29 +45,29 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Ayu Dark"
+    "dark": "Ayu Dark",
   },
   "lsp": {
     "biome": {
       "binary": {
         "path": "yarn",
-        "arguments": ["exec", "biome", "lsp-proxy"]
-      }
+        "arguments": ["exec", "biome", "lsp-proxy"],
+      },
     },
     "vtsls": {
       "settings": {
         "typescript": {
           "updateImportsOnFileMove": {
-            "enabled": "always"
-          }
+            "enabled": "always",
+          },
         },
         "javascript": {
           "updateImportsOnFileMove": {
-            "enabled": "always"
-          }
-        }
+            "enabled": "always",
+          },
+        },
       },
-      "enable_lsp_tasks": true
-    }
-  }
+      "enable_lsp_tasks": true,
+    },
+  },
 }
