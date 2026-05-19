@@ -11,7 +11,7 @@
     <string>mkdir -p "$HOME/.cache/dot-brew" &amp;&amp; exec "$HOME/bin/brew-update" &gt;&gt;"$HOME/.cache/dot-brew/upgrade.log" 2&gt;&amp;1</string>
   </array>
   <key>RunAtLoad</key>
-  <false/>
+  <true/>
   <key>StartCalendarInterval</key>
   <dict>
     <key>Weekday</key>

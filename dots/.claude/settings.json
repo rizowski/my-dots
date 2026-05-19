@@ -1,7 +1,11 @@
 {
+  "permissions": {
+    "defaultMode": "auto"
+  },
   "statusLine": {
     "type": "command",
-    "command": "bash ~/bin/claude-statusline"
+    "command": "bash ~/bin/claude-statusline",
+    "refreshInterval": 1
   },
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true,
@@ -13,8 +17,10 @@
     "vercel@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
     "chrome-devtools-mcp@claude-plugins-official": true,
-    "remember@claude-plugins-official": true,
-    "terraform@claude-plugins-official": true
+    "remember@claude-plugins-official": false,
+    "terraform@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "anthropic-agent-skills": {
@@ -28,6 +34,13 @@
         "source": "github",
         "repo": "warpdotdev/claude-code-warp"
       }
+    },
+    "chrome-devtools-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "ChromeDevTools/chrome-devtools-mcp"
+      }
     }
-  }
+  },
+  "agentPushNotifEnabled": true
 }

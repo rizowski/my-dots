@@ -8,6 +8,14 @@ last_upgrade="$cache_dir/last-upgrade"
 
 mkdir -p "$cache_dir"
 
+min_interval_days=6
+last=$(cat "$last_upgrade" 2>/dev/null || echo 0)
+now=$(date +%s)
+if [ $((now - last)) -lt $((min_interval_days * 86400)) ]; then
+  echo "Skipping: last upgrade was less than ${min_interval_days} days ago"
+  exit 0
+fi
+
 echo "Starting to update brew"
 "$brew" update
 

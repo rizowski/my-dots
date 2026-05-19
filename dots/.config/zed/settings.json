@@ -9,21 +9,21 @@
 {
   "cli_default_open_behavior": "new_window",
   "project_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "outline_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "collaboration_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "agent": {
     "dock": "right",
     "favorite_models": [],
-    "model_parameters": []
+    "model_parameters": [],
   },
   "git_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "use_smartcase_search": true,
   "base_keymap": "VSCode",
@@ -70,4 +70,29 @@
       "enable_lsp_tasks": true,
     },
   },
+  "file_scan_exclusions": [
+    "**/*.bundle",
+    "**/*.code-search",
+    "**/*.jsbundle",
+    "**/*.map",
+    "**/*.svg",
+    "**/*.terraform",
+    "**/.build",
+    "**/.cubestore",
+    "**/.next",
+    "**/.pnp.*",
+    "**/.serverless",
+    "**/.webpack",
+    "**/.well-known",
+    "**/.yarn",
+    "**/Pods",
+    "**/bower_components",
+    "**/dist",
+    "**/generated",
+    "**/node_modules",
+    "**/prisma/client",
+    "**/.turbo",
+    "**/.venv",
+    "**/.terragrunt-cache",
+  ],
 }
