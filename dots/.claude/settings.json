@@ -1,7 +1,8 @@
 {
   "permissions": {
-    "defaultMode": "auto"
+    "defaultMode": "plan"
   },
+  "model": "opus[1m]",
   "statusLine": {
     "type": "command",
     "command": "bash ~/bin/claude-statusline",
@@ -20,7 +21,8 @@
     "remember@claude-plugins-official": false,
     "terraform@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true,
-    "security-guidance@claude-plugins-official": true
+    "security-guidance@claude-plugins-official": true,
+    "moonrepo@hyperb1iss-skills": true
   },
   "extraKnownMarketplaces": {
     "anthropic-agent-skills": {
@@ -40,7 +42,17 @@
         "source": "github",
         "repo": "ChromeDevTools/chrome-devtools-mcp"
       }
+    },
+    "hyperb1iss-skills": {
+      "source": {
+        "source": "github",
+        "repo": "hyperb1iss/moonrepo-skill"
+      }
     }
   },
-  "agentPushNotifEnabled": true
+  "advisorModel": "opus",
+  "tui": "fullscreen",
+  "skipWorkflowUsageWarning": true,
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true
 }

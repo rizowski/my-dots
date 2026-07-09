@@ -64,12 +64,24 @@ FAST_HIGHLIGHT_STYLES[alias]=fg=green
 FAST_HIGHLIGHT_STYLES[precommand]=fg=green,underline
 FAST_HIGHLIGHT_STYLES[unknown-token]=fg=red,bold
 
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+setopt SHARE_HISTORY       # global: all sessions share one history, live
+setopt EXTENDED_HISTORY    # record timestamps
 setopt INC_APPEND_HISTORY
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_DUPS
+setopt AUTO_CD             # bare paths like ../../ cd instead of trying to exec
 
 source <(fzf --zsh)
+eval "$(atuin init zsh --disable-up-arrow)" # atuin owns ctrl-r; up-arrow stays native zsh
 eval "$(starship init zsh)"
+
+# Inline, prefix-filtered history cycling on up/down (no menu, single Enter to run).
+# Must come after atuin init so it isn't overridden.
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # source ~/.config/op/plugins.sh
 source ~/.aliases

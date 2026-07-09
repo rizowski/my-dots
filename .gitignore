@@ -34,12 +34,16 @@ dots/.gnupg/*.gpg
 # Allowlist only the files/dirs we explicitly track. Anything else is ignored
 # by default so new files can't leak (tokens, sockets, caches, work references).
 dots/.config/*
+!dots/.config/atuin/
 !dots/.config/gh/
 !dots/.config/gh-copilot/
 !dots/.config/nix/
 !dots/.config/op/
 !dots/.config/starship.toml
 !dots/.config/zed/
+
+dots/.config/atuin/*
+!dots/.config/atuin/config.toml
 
 dots/.config/gh/*
 !dots/.config/gh/config.yml

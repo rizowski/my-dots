@@ -29,8 +29,8 @@
   "base_keymap": "VSCode",
   "agent_servers": {
     "claude-acp": {
-      "type": "registry",
-    },
+      "type": "registry"
+    }
   },
   "buffer_font_family": "Monaspace Argon Var",
   "icon_theme": {
