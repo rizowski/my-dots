@@ -117,8 +117,15 @@ elif [ -n "$cwd" ]; then
   branch=$(git -C "$real" symbolic-ref --short HEAD 2>/dev/null || git -C "$real" rev-parse --short HEAD 2>/dev/null)
 fi
 
+wt=""
+if [[ "$cwd" == */.claude/worktrees/* ]]; then
+  cwd="${cwd#*/.claude/worktrees/}"   # keep worktree name + deeper path
+  trees=(🌳 🌲 🌴 🎄 🎋 🌱 🎍 🪴 🌿)
+  wt="${trees[$(( now % ${#trees[@]} ))]} "
+fi
+
 out=""
-[ -n "$cwd" ] && out="${CYN}${cwd}${RST}"
+[ -n "$cwd" ] && out="${GRN}${wt}${RST}${CYN}${cwd}${RST}"
 [ -n "$branch" ] && out="${out} ${DIM}on${RST} ${GRN}${branch}${RST}"
 [ -n "$model" ] && out="${out} ${DIM}|${RST} ${MAG}${model}${RST}"
 
