@@ -16,7 +16,13 @@ Darwin)
   test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
   ;;
 Linux)
-  HB_CNF_HANDLER="$HOMEBREW_PREFIX/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
+  # Arch/CachyOS: pkgfile provides command-not-found (installed via
+  # packages/pacman.txt). Fall back to the brew handler on Ubuntu-linuxbrew.
+  if [ -f /usr/share/doc/pkgfile/command-not-found.zsh ]; then
+    HB_CNF_HANDLER="/usr/share/doc/pkgfile/command-not-found.zsh"
+  else
+    HB_CNF_HANDLER="$HOMEBREW_PREFIX/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
+  fi
   ;;
 esac
 
@@ -86,7 +92,10 @@ bindkey '^[[B' history-substring-search-down
 # source ~/.config/op/plugins.sh
 source ~/.aliases
 
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+# rbenv/ruby-build openssl hint (macOS/Ubuntu-brew only; Arch finds it natively).
+if command -v brew >/dev/null 2>&1; then
+  export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+fi
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

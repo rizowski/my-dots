@@ -1,0 +1,40 @@
+# Official-repo packages for Arch / CachyOS.
+# Installed with: sudo pacman -S --needed --noconfirm - < packages/pacman.txt
+# One package per line. '#' comments and blank lines are ignored.
+#
+# Essentials only — the set the dotfiles actually reference. Add more as needed;
+# see `pacman -Ss <name>` to find packages. macOS-only tooling stays in
+# dots/.Brewfile.
+
+# --- core / build ---
+base-devel
+git
+stow
+zsh
+pkgfile
+
+# --- shell / prompt / history ---
+starship
+atuin
+zoxide
+fzf
+zsh-completions
+
+# --- daily cli ---
+eza
+bat
+jq
+ripgrep
+btop
+vim
+tree
+git-delta
+
+# --- cloud (used by zsh plugins) ---
+gh
+kubectl
+aws-cli-v2
+
+# --- ruby (rbenv toolchain) ---
+ruby
+rbenv

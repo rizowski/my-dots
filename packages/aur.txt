@@ -1,0 +1,12 @@
+# AUR packages for Arch / CachyOS.
+# Installed with: paru -S --needed --noconfirm - < packages/aur.txt
+# One package per line. '#' comments and blank lines are ignored.
+#
+# Essentials only — add more as needed (`paru -Ss <name>` to search the AUR).
+
+# 1Password desktop + CLI (desktop installs to /opt/1Password, used by .gitconfig-linux)
+1password
+1password-cli
+
+# rbenv's build backend (pairs with the repo `rbenv`)
+ruby-build

@@ -16,17 +16,22 @@ Darwin)
   ;;
 Linux)
   export ONEPASS_SSH_AGENT_PATH="$HOME/.1password/agent.sock"
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  export PATH="$HOMEBREW_PREFIX/.linuxbrew/bin:$PATH"
-  export PATH="$HOMEBREW_PREFIX/.linuxbrew/sbin:$PATH"
+  # linuxbrew only if present (Ubuntu). Arch/CachyOS is native — no brew.
+  if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  fi
   ;;
 esac
 
 test -e "${HOME}/.rover/env" && source "${HOME}/.rover/env"
 
-export PATH="$HOMEBREW_PREFIX/opt/openjdk@11/bin:$PATH"
-export PATH="$HOMEBREW_PREFIX/opt/ruby/bin:$PATH"
-export PATH="$HOMEBREW_PREFIX/opt/ruby@2.7/bin:$PATH"
+# Homebrew cellar paths only where brew is set up (macOS / Ubuntu-linuxbrew). On
+# Arch these binaries come from pacman and are already on PATH.
+if [ -n "$HOMEBREW_PREFIX" ]; then
+  export PATH="$HOMEBREW_PREFIX/opt/openjdk@11/bin:$PATH"
+  export PATH="$HOMEBREW_PREFIX/opt/ruby/bin:$PATH"
+  export PATH="$HOMEBREW_PREFIX/opt/ruby@2.7/bin:$PATH"
+fi
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"

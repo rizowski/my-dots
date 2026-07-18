@@ -3,15 +3,21 @@
 set -e
 
 RECONFIGURE=0
+PRUNE=0
 for arg in "$@"; do
   case "$arg" in
     --reconfigure) RECONFIGURE=1 ;;
+    --prune) PRUNE=1 ;;
     -h|--help)
       cat <<EOF
-Usage: ./install [--reconfigure]
+Usage: ./install [--reconfigure] [--prune]
 
   --reconfigure  Re-prompt for work git identity and PATH overlays even if
                  ~/.gitconfig-work.local or ~/.zprofile.local already exist.
+  --prune        (Arch only) After installing, remove packages the dots
+                 previously installed that are no longer listed in
+                 packages/*.txt. Lists them and asks before removing; only ever
+                 touches names in ~/.local/state/dots/installed-*.txt.
 EOF
       exit 0
       ;;
@@ -24,34 +30,150 @@ done
 
 echo "$OSTYPE $(uname)"
 
+# Emit a package list with comments and blank lines stripped.
+pkg_list() {
+  grep -vE '^[[:space:]]*(#|$)' "$1" 2>/dev/null
+}
+
+# Record packages this run actually added, so they can be removed later without
+# touching anything that pre-existed. new = (declared ∩ current) − before.
+# Usage: record_new "<declared>" "<before>" "<current>" <manifest-file>
+record_new() {
+  local declared="$1" before="$2" current="$3" manifest="$4"
+  mkdir -p "$(dirname "$manifest")"
+  local new
+  new=$(comm -23 \
+    <(comm -12 <(printf '%s\n' "$declared" | sort -u) <(printf '%s\n' "$current" | sort -u)) \
+    <(printf '%s\n' "$before" | sort -u) | grep -vx 'base-devel')
+  # Union-merge into the manifest (bare names only, so `pacman -Rns $(cat …)` works).
+  { cat "$manifest" 2>/dev/null; printf '%s\n' "$new"; } |
+    grep -vE '^[[:space:]]*$' | sort -u >"$manifest.tmp" && mv "$manifest.tmp" "$manifest"
+}
+
+# Rewrite a manifest to only the names still installed (drops removed entries).
+# Usage: reconcile_manifest <manifest-file> "<currently-installed names>"
+reconcile_manifest() {
+  local manifest="$1" installed="$2"
+  [ -f "$manifest" ] || return 0
+  comm -12 <(sort -u "$manifest") <(printf '%s\n' "$installed" | sort -u) >"$manifest.tmp" &&
+    mv "$manifest.tmp" "$manifest"
+}
+
+install_arch() {
+  # Native provisioning for Arch-family distros (Arch, CachyOS, EndeavourOS, …)
+  # via pacman + paru (AUR) + flatpak. No Homebrew.
+  local dir="$PWD/packages"
+  local state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/dots"
+  echo "Arch-family distro detected — provisioning with pacman/paru/flatpak."
+
+  # Snapshot what's installed BEFORE we touch anything, so the manifests below
+  # capture only what this run adds.
+  local before_pac before_aur before_flat
+  before_pac=$(pacman -Qq 2>/dev/null | sort -u)
+  before_aur=$(pacman -Qmq 2>/dev/null | sort -u)
+  before_flat=$(flatpak list --app --columns=application 2>/dev/null | sort -u)
+
+  sudo pacman -Syu --needed --noconfirm
+
+  # Ensure paru (AUR helper). CachyOS ships it; bootstrap for portability.
+  if ! command -v paru >/dev/null 2>&1; then
+    echo "Bootstrapping paru from AUR..."
+    sudo pacman -S --needed --noconfirm base-devel git
+    local tmp
+    tmp=$(mktemp -d)
+    git clone https://aur.archlinux.org/paru.git "$tmp/paru"
+    (cd "$tmp/paru" && makepkg -si --noconfirm)
+    rm -rf "$tmp"
+  fi
+
+  # Ensure flatpak + the Flathub remote.
+  sudo pacman -S --needed --noconfirm flatpak
+  flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+  # Official-repo packages.
+  if [ -f "$dir/pacman.txt" ]; then
+    pkg_list "$dir/pacman.txt" | sudo pacman -S --needed --noconfirm -
+  fi
+
+  # AUR packages.
+  if [ -f "$dir/aur.txt" ]; then
+    pkg_list "$dir/aur.txt" | paru -S --needed --noconfirm -
+  fi
+
+  # Flatpak apps (per-app so one bad id doesn't abort the rest).
+  if [ -f "$dir/flatpak.txt" ]; then
+    while IFS= read -r app; do
+      [ -n "$app" ] || continue
+      flatpak install -y --noninteractive flathub "$app" || echo "  warn: flatpak install failed for $app"
+    done < <(pkg_list "$dir/flatpak.txt")
+  fi
+
+  # Record what this run actually added, per manager, into per-machine manifests
+  # under $state_dir. Remove later with, e.g.:
+  #   sudo pacman -Rns $(cat "$state_dir/installed-pacman.txt")
+  #   paru      -Rns $(cat "$state_dir/installed-aur.txt")
+  #   xargs -a "$state_dir/installed-flatpak.txt" -r flatpak uninstall -y
+  if [ -f "$dir/pacman.txt" ]; then
+    record_new "$(pkg_list "$dir/pacman.txt")" "$before_pac" \
+      "$(pacman -Qq 2>/dev/null)" "$state_dir/installed-pacman.txt"
+  fi
+  if [ -f "$dir/aur.txt" ]; then
+    record_new "$(pkg_list "$dir/aur.txt")" "$before_aur" \
+      "$(pacman -Qmq 2>/dev/null)" "$state_dir/installed-aur.txt"
+  fi
+  if [ -f "$dir/flatpak.txt" ]; then
+    record_new "$(pkg_list "$dir/flatpak.txt")" "$before_flat" \
+      "$(flatpak list --app --columns=application 2>/dev/null)" "$state_dir/installed-flatpak.txt"
+  fi
+  echo "Recorded newly-installed packages under $state_dir/"
+
+  sudo chsh -s "$(command -v zsh)" "$USER"
+}
+
+install_apt() {
+  # Debian/Ubuntu path — still Homebrew-backed for CLI tools.
+  sudo apt update
+  sudo apt upgrade -y
+  sudo apt install zsh podman -y
+  sudo chsh -s "$(command -v zsh)" "$USER"
+  export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+}
+
 case $(uname) in
 Darwin)
   xcode-select --install | 2>/dev/null
   ;;
 Linux)
-  sudo apt update
-  sudo apt upgrade -y
-  sudo apt install zsh podman -y
-  sudo chsh -s $(which zsh) $USER
-  export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+  [ -r /etc/os-release ] && . /etc/os-release
+  # Package provisioning is best-effort: a failed pacman upgrade, AUR build, or
+  # flatpak fetch must NOT abort the run before the stow step (dotfile linking is
+  # the primary job and happens ~200 lines below). Warn and continue.
+  case " ${ID:-} ${ID_LIKE:-} " in
+  *" arch "* | *cachyos*)
+    install_arch || echo "warn: Arch package provisioning had errors; continuing to dotfile linking." >&2
+    ;;
+  *" debian "* | *" ubuntu "*)
+    install_apt || echo "warn: apt/brew provisioning had errors; continuing to dotfile linking." >&2
+    ;;
+  *)
+    echo "Unknown Linux distro (ID=${ID:-?}); skipping package install." >&2
+    ;;
+  esac
   ;;
 esac
 
-# Ensure Homebrew is installed and on PATH before we need it for prompts/bundle.
-if ! command -v brew >/dev/null 2>&1; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
-case $(uname) in
-Darwin)
+# Homebrew is macOS-only here; Arch/CachyOS uses native packages (pacman/paru/
+# flatpak) and Ubuntu manages its own linuxbrew PATH in install_apt.
+if [ "$(uname)" = "Darwin" ]; then
+  if ! command -v brew >/dev/null 2>&1; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
   [ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
-  ;;
-Linux)
-  [ -x /home/linuxbrew/.linuxbrew/bin/brew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  ;;
-esac
+fi
 
-# Install gum for nicer interactive prompts (falls back to plain read if unavailable).
-command -v gum >/dev/null 2>&1 || brew install gum || true
+# gum drives the nicer interactive prompts (falls back to plain read if absent).
+# It comes from brew on macOS and from packages/pacman.txt on Arch.
+command -v gum >/dev/null 2>&1 || { command -v brew >/dev/null 2>&1 && brew install gum; } || true
 
 scaffold_local() {
   local target="$1"
@@ -231,14 +353,54 @@ fi
 mkdir -p "$HOME/.claude"
 (cd dots && stow -t ~/.claude .claude)
 
+# Link the HOME-level dotfiles. Stow only handles dots/.config + dots/.claude;
+# these live directly in $HOME (git/shell conventions) and were previously left
+# unlinked — which broke the 1Password SSH agent (needs ~/.zshenv to export
+# ONEPASS_SSH_AGENT_PATH) and git identity/signing (needs ~/.gitconfig).
+# Explicit, curated list — NOT a blanket stow — so secret trees (.ssh/.aws/
+# .gnupg) and repo-dev files (.editorconfig/.prettierrc/…) are never linked.
+link_home_file() {
+  local src="$PWD/dots/$1" dst="$HOME/$1"
+  [ -e "$src" ] || return 0
+  if [ -L "$dst" ] && [ "$(readlink -f "$dst")" = "$(readlink -f "$src")" ]; then
+    return 0 # already correctly linked
+  fi
+  if [ -e "$dst" ] && [ ! -L "$dst" ]; then
+    mv "$dst" "$dst.pre-stow.bak" && echo "  backed up $dst -> $dst.pre-stow.bak"
+  fi
+  ln -sfn "$src" "$dst" && echo "  linked $dst"
+}
+
+echo "Linking HOME dotfiles..."
+for f in .zshenv .zshrc .zprofile .profile .aliases .vimrc \
+         .gitconfig .gitconfig-linux .gitconfig-mac; do
+  link_home_file "$f"
+done
+# ~/.Brewfile only matters where brew exists (macOS / Ubuntu); brew bundle --global reads it.
+command -v brew >/dev/null 2>&1 && link_home_file .Brewfile
+
+# Helper scripts referenced by the shell + statusline (e.g. ~/bin/claude-statusline,
+# upfind used by aws_auto_profile_hook). Link each so ~/bin can also hold local scripts.
+if [ -d "$PWD/dots/bin" ]; then
+  mkdir -p "$HOME/bin"
+  for s in "$PWD"/dots/bin/*; do
+    dst="$HOME/bin/$(basename "$s")"
+    [ -L "$dst" ] && [ "$(readlink -f "$dst")" = "$(readlink -f "$s")" ] && continue
+    ln -sfn "$s" "$dst" && echo "  linked $dst"
+  done
+fi
+
 # .aws/ is gitignored; .ssh stays tracked with --assume-unchanged for now.
 git update-index --assume-unchanged ./dots/.ssh/** 2>/dev/null
 
 [ -d ~/.config/op ] && chmod 700 ~/.config/op
 
-brew bundle install --global
-
-[ -f "$HOME/.Brewfile.local" ] && brew bundle install --file="$HOME/.Brewfile.local"
+# Homebrew bundles only where brew exists (macOS / Ubuntu-linuxbrew). On Arch the
+# equivalent packages come from packages/pacman.txt|aur.txt|flatpak.txt.
+if command -v brew >/dev/null 2>&1; then
+  brew bundle install --global
+  [ -f "$HOME/.Brewfile.local" ] && brew bundle install --file="$HOME/.Brewfile.local"
+fi
 
 apply_uninstalls() {
   local list="$PWD/uninstall.list"
@@ -277,6 +439,70 @@ apply_uninstalls() {
 }
 
 apply_uninstalls
+
+prune_arch() {
+  # --prune: remove packages the dots previously installed (recorded in the
+  # per-machine manifest) that are no longer declared in packages/*.txt. Only
+  # ever considers names already in the manifest — never other system packages.
+  [ "$PRUNE" = "1" ] || return 0
+  command -v pacman >/dev/null 2>&1 || return 0
+
+  local dir="$PWD/packages"
+  local state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/dots"
+
+  # names in <manifest> that are no longer in <declared-list>
+  delisted() {
+    local manifest="$1" declared="$2"
+    [ -f "$manifest" ] || return 0
+    comm -23 <(sort -u "$manifest") <(pkg_list "$declared" 2>/dev/null | sort -u)
+  }
+
+  local pac aur flat
+  pac=$(delisted "$state_dir/installed-pacman.txt" "$dir/pacman.txt")
+  aur=$(delisted "$state_dir/installed-aur.txt" "$dir/aur.txt")
+  flat=$(delisted "$state_dir/installed-flatpak.txt" "$dir/flatpak.txt")
+
+  if [ -z "$pac$aur$flat" ]; then
+    echo "Prune: nothing to remove — manifest matches packages/*.txt."
+    return 0
+  fi
+
+  echo
+  echo "-- Prune: dot-installed packages no longer listed in packages/*.txt --"
+  [ -n "$pac" ] && { echo "  pacman:";  printf '    %s\n' $pac; }
+  [ -n "$aur" ] && { echo "  aur:";     printf '    %s\n' $aur; }
+  [ -n "$flat" ] && { echo "  flatpak:"; printf '    %s\n' $flat; }
+  echo "  (pacman -Rns may also remove now-unneeded dependencies.)"
+
+  if ! confirm "Remove the above?"; then
+    echo "Prune cancelled — nothing removed."
+    return 0
+  fi
+
+  # pacman -Rns removes repo + AUR packages alike; it refuses rather than break
+  # a still-needed dependency, so a failure here is safe (nothing half-removed).
+  local native
+  native=$(printf '%s %s' "$pac" "$aur" | xargs)
+  if [ -n "$native" ]; then
+    sudo pacman -Rns --noconfirm $native ||
+      echo "  warn: some pacman removals failed (a dependency may still need them)"
+  fi
+  if [ -n "$flat" ]; then
+    local app
+    for app in $flat; do
+      flatpak uninstall -y "$app" || echo "  warn: flatpak uninstall failed for $app"
+    done
+  fi
+
+  # Reconcile manifests to reality — keep only what's still installed.
+  reconcile_manifest "$state_dir/installed-pacman.txt" "$(pacman -Qq 2>/dev/null)"
+  reconcile_manifest "$state_dir/installed-aur.txt" "$(pacman -Qmq 2>/dev/null)"
+  reconcile_manifest "$state_dir/installed-flatpak.txt" \
+    "$(flatpak list --app --columns=application 2>/dev/null)"
+  echo "Prune complete."
+}
+
+prune_arch
 
 setup_brew_launchd() {
   [ "$(uname)" = "Darwin" ] || return 0

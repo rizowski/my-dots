@@ -7,4 +7,11 @@ alias ls=eza
 # alias gh='op plugin run -- gh'
 #alias ls=k
 
+# Linux only — macOS already ships a native `open`. Opens a path (default: the
+# current dir) in the desktop's default handler (Dolphin for folders on KDE),
+# detached so it doesn't tie up the terminal.
+if [ "$(uname)" = "Linux" ] && command -v xdg-open >/dev/null 2>&1; then
+  open() { xdg-open "${@:-.}" >/dev/null 2>&1 & disown; }
+fi
+
 [ -f "$HOME/.aliases.local" ] && source "$HOME/.aliases.local"

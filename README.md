@@ -2,8 +2,48 @@
 
 ## OS Support
 
-- MacOS
-- Ubuntu Linux
+- macOS (Homebrew)
+- Arch / CachyOS (native: pacman + paru + flatpak)
+- Ubuntu Linux (linuxbrew)
+
+`./install` detects the OS and, on Linux, the distro family via `/etc/os-release`.
+Arch-family boxes are provisioned natively from the tracked package lists in
+`packages/` — no Homebrew:
+
+| List | Manager | Install |
+| --- | --- | --- |
+| `packages/pacman.txt` | `pacman` | official repos |
+| `packages/aur.txt` | `paru` | AUR |
+| `packages/flatpak.txt` | `flatpak` | Flathub |
+
+Each list is plain text, one package per line; `#` comments and blank lines are
+ignored. They hold an **essentials** set (what the dotfiles reference) — add more
+by editing the files. Homebrew (and the `~/.Brewfile`) is used only on macOS and
+Ubuntu.
+
+#### Tracking / removing what was installed
+
+`pacman` has no "installed by X" tag, so on Arch the installer writes a manifest
+of the packages **it actually added** (never anything that pre-existed) to
+`~/.local/state/dots/`:
+
+- `installed-pacman.txt`, `installed-aur.txt`, `installed-flatpak.txt`
+
+To remove exactly what the dots installed on a machine:
+
+```sh
+sudo pacman -Rns $(cat ~/.local/state/dots/installed-pacman.txt)
+paru      -Rns $(cat ~/.local/state/dots/installed-aur.txt)
+xargs -a ~/.local/state/dots/installed-flatpak.txt -r flatpak uninstall -y
+```
+
+**`./install --prune`** does this selectively: after installing, it removes only
+the packages the dots previously installed that you've since **deleted from
+`packages/*.txt`**. It lists them and asks before removing, and only ever touches
+names already in the manifest — a normal `./install` stays additive and removes
+nothing. (Drop `eza` from `pacman.txt`, run `./install --prune`, and it offers to
+uninstall `eza`; packages you installed by hand are never in the manifest, so
+they're never touched.)
 
 ## Getting started
 

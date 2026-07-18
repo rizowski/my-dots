@@ -8,8 +8,15 @@ Personal dotfiles for macOS and Ubuntu Linux. Configs are deployed via GNU Stow;
 
 ## Install / deploy
 
-- `./install` — OS-detects, installs prerequisites (xcode-select on Darwin; zsh/podman via apt on Linux), stows `dots/.config` into `~/.config`, marks `.aws`/`.ssh` as `assume-unchanged`, and runs `brew bundle install --global`.
-- Most brew/antigen lines in `install` are commented out; re-enable as needed when bootstrapping a fresh machine.
+- `./install` — OS-detects, installs prerequisites, stows `dots/.config` into `~/.config`, marks `.aws`/`.ssh` as `assume-unchanged`.
+  - **macOS**: xcode-select, Homebrew, `brew bundle install --global`.
+  - **Linux**: detects distro family via `/etc/os-release`.
+    - **Arch / CachyOS** (`install_arch`): native only — `pacman -Syu`, bootstraps `paru` if missing, adds the Flathub remote, then installs from `packages/pacman.txt` (repos), `packages/aur.txt` (AUR via paru), and `packages/flatpak.txt` (Flathub). **No Homebrew.** Lists hold an essentials set only.
+    - **Debian / Ubuntu** (`install_apt`): apt for zsh/podman, then linuxbrew + `brew bundle`.
+  - All `brew` steps are guarded by `command -v brew`, so they no-op on Arch.
+- `packages/*.txt` are plain lists (one package per line; `#` comments and blank lines stripped by `pkg_list`), sibling to `uninstall.list`. When adding a Linux tool, add it to the right list; keep macOS-only tools in `dots/.Brewfile` only.
+- **Install manifest** (Arch): `install_arch` snapshots the system before installing and records only newly-added packages (`record_new`, `new = declared ∩ current − before`, `base-devel` group filtered) to `~/.local/state/dots/installed-{pacman,aur,flatpak}.txt` (per-machine, untracked). Bare names, union-merged across runs; remove with `pacman -Rns $(cat …)` / `paru -Rns …` / `flatpak uninstall`. Pre-existing packages are never recorded.
+- **`./install --prune`** (Arch): `prune_arch` removes packages in the manifest that are no longer declared in `packages/*.txt` (`delisted = manifest − declared`), lists them, `confirm`s, then `reconcile_manifest` rewrites each manifest to only what's still installed. Only ever considers manifest names — a normal run stays additive. Runs after `apply_uninstalls` (both no-op without `--prune` / off Arch).
 - `scripts/mac-settings.sh` — macOS `defaults write` tweaks (run manually).
 
 ## Layout that matters

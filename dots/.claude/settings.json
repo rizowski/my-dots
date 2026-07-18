@@ -50,6 +50,7 @@
     }
   },
   "advisorModel": "opus",
+  "theme": "dark",
   "tui": "fullscreen",
   "skipWorkflowUsageWarning": true,
   "agentPushNotifEnabled": true,

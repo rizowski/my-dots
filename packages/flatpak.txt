@@ -1,0 +1,21 @@
+# Flathub application IDs for Arch / CachyOS.
+# Installed with: flatpak install -y flathub <id>  (one per line)
+# '#' comments and blank lines are ignored.
+#
+# Essentials only. Uncomment / add the GUI apps you actually want on this box
+# (`flatpak search <name>` to find IDs).
+
+# git mergetool referenced by dots/.gitconfig-linux ([mergetool "meld"])
+org.gnome.meld
+
+# --- common GUI apps (commented; enable per machine) ---
+# com.brave.Browser
+# org.mozilla.firefox
+# com.google.Chrome
+# md.obsidian.Obsidian
+# com.discordapp.Discord
+# com.slack.Slack
+# us.zoom.Zoom
+# com.spotify.Client
+# com.getpostman.Postman
+# io.podman_desktop.PodmanDesktop
