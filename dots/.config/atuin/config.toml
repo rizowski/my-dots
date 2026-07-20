@@ -1,0 +1,16 @@
+## Local-only: no atuin.sh account. To enable sync later: atuin register / atuin login
+auto_sync = false
+update_check = false
+
+## Run the selected command immediately on Enter (Tab puts it on the prompt to edit)
+enter_accept = true
+
+style = "compact"
+inline_height = 20
+
+## Ctrl-R searches all history regardless of session/directory
+filter_mode = "global"
+
+## Up-arrow is handed back to zsh (see --disable-up-arrow in .zshrc), so this is moot,
+## but keep it global for clarity
+filter_mode_shell_up_key_binding = "global"
