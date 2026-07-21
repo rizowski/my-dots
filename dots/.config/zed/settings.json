@@ -94,5 +94,6 @@
     "**/.turbo",
     "**/.venv",
     "**/.terragrunt-cache",
+    "**/.claude/worktrees"
   ],
 }

@@ -1,4 +1,5 @@
 {
+  "useAutoModeDuringPlan": true,
   "permissions": {
     "defaultMode": "plan"
   },
